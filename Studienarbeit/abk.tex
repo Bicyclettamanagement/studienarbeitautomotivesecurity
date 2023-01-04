@@ -1,0 +1,38 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Descr:       Vorlage für Berichte der DHBW-Karlsruhe, Datei mit Abkürzungen
+%% Author:      Prof. Dr. Jürgen Vollmer, vollmer@dhbw-karlsruhe.de
+%% $Id: abk.tex,v 1.4 2017/10/06 14:02:03 vollmer Exp $
+%% -*- coding: utf-8 -*-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter*{Abkürzungsverzeichnis}                   % chapter*{..} -->   keine Nummer, kein "Kapitel"
+						         % Nicht ins Inhaltsverzeichnis
+% \addcontentsline{toc}{chapter}{Akürzungsverzeichnis}   % Damit das doch ins Inhaltsverzeichnis kommt
+
+% Hier werden die Abkürzungen definiert
+\begin{acronym}[DHBW]
+  % \acro{Name}{Darstellung der Abkürzung}{Langform der Abkürzung}
+ \acro{Abk}[Abk.]{Abkürzung}
+ \acro{GBC}[GBC]{Global Business Center}
+ \acro{CD}[CD]{Corporate Department}
+ \newacroplural{CD}[CD]{Corporate Departments}
+ \acro{DMT}[DMT]{Digital Manufacturing Team}
+ \acro{ISN}[ISN]{Intelligent Supply Network}
+ \acro{BU}[BU]{Business Unit}
+ \acro{HTML}[HTML]{Hypertext Markup Language}
+ \acro{ISTQB}[ISTQB]{International Software Testing Qualification Board}
+ \acro{SUT}[SUT]{System under Test}
+ \acro{UI}[UI]{User Interface}
+ \acro{API}[API]{Application Programming Interface}
+ \acro{MVC}[MVC]{Model View Controller}
+
+ \acro{IDE}[IDE]{Integrated Development Environment}
+ % Folgendes benutzen, wenn der Plural einer Abk. benöigt wird
+ % \newacroplural{Name}{Darstellung der Abkürzung}{Langform der Abkürzung}
+ \newacroplural{Abk}[Abk-en]{Abkürzungen}
+
+ \acro{H2O}[\ensuremath{H_2O}]{Di-Hydrogen-Monoxid}
+
+ % Wenn neicht benutzt, erscheint diese Abk. nicht in der Liste
+ \acro{NUA}{Not Used Acronym}
+\end{acronym}

@@ -1,0 +1,10 @@
+*.aux
+*.bbl
+*.lof
+*.blg
+*.idx
+*.ist
+*.log
+*.gz
+*.toc
+bericht.run.xml
