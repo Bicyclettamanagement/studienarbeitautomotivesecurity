@@ -77,7 +77,7 @@
 %\newcommand{\Studiengang}{Informatik / Informationstechnik}
 \newcommand{\Studiengang}{Informatik / Angewandte Informatik}
 \newcommand*{\quelle}{%
-\footnotesize Source:
+\footnotesize Quelle:
 }
 \hypersetup{%%
   pdfauthor={\Autor},
@@ -90,11 +90,12 @@
 % Wenn \includeonly{..} benutzt wird, werden nur diese Kaptitel ausgegeben.
 \includeonly{
   abk
- %,kapitel2
 % ,changelog
  ,abstract
  ,Einführung
- ,Hauptteil
+ ,Grundlagen
+ ,Ausarbeitung
+ ,Fazit
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -168,8 +169,10 @@ Gutachter der Studienakademie	 & \BetreuerDHBW		\\
 \newpage
 \pagenumbering{arabic}
 \include{Einführung}
-%\include{Hauptteil}
-%\include{kapitel2}
+\include{Grundlagen}
+\include{Ausarbeitung}
+\include{Fazit}
+
 
 % Ab hier beginnt der Anhang
 \appendix
