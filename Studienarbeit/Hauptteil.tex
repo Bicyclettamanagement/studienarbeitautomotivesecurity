@@ -12,14 +12,15 @@ Im Inneren von Autos befinden sich heutzutage eine Vielzahl elektronischer Syste
 \quelle{\cite[2]{MohammadAshjaei.2021}}
 \end{figure}
 
-Für die Venetzung der \acsp{ECU} kommen verschiedene Technologien zum Einsatz (siehe Abbildung \ref{fig:communication-protocols}). Diese werden im Folgenden genauer erläutert. Die relevanteste davon ist im Automotive-Bereich der sogenannte \acs{CAN}-Standard.
+Für die Venetzung der \acsp{ECU} kommen verschiedene Technologien zum Einsatz (siehe Abbildung \ref{fig:communication-protocols}). Die relevantesten davon werden im Folgenden genauer erläutert. Die wichtigste  davon ist im Automotive-Bereich der sogenannte \acs{CAN}-Standard.
 
 \subsection{Controller Area Network}
 Die elektronischen Kontrolleinheiten eines Autos sind typischerweise über einen oder mehrere Busse, die auf dem \ac{CAN}-Standard basieren, miteinander verbunden. Hierbei kommunizieren die \acsp{ECU} über \acs{CAN}-Pakete. Diese werden an alle Komponenten gesendet, welche dann jeweils basierend auf dem Inhalt entscheiden, ob das Paket für sie bestimmt ist oder nicht. Eine Identifikation der Quelle oder Authentisierung gibt es in diesem Standard nicht. \cite[vgl.][7]{Miller.2013} \\
+Generell wird meistens zwischen High Speed \acs{CAN} und Low Speed \acs{CAN} unterschieden. High Speed \acs{CAN} wird eingesetzt, wenn bei der Übertragung hohe Geschwindigkeit benötigt wird, beispielsweise bei sicherheitskritischen Anwendungsfällen. Außerdem wird bietet sich die Verwendung von High Speed \acs{CAN} bei der Übertragung von großen Datenmengen an.
 In Abbildung \ref{fig:canbus-ford2010} ist das \acs{CAN}-Netzwerk eines 2010 Ford Escape dargestellt. Das abgebildete Netzwerk verfügt über zwei Busse, einen medium speed (MS) und einen high speed (HS) \acs{CAN}-Bus. Beide Busse enden hier im \ac{DLC} (siehe Kapitel \ref{OBD-II}).
 In Automotive Netzwerken lassen sich zwei Arten von \acs{CAN}-Paketen finden: normale \acs{CAN}-Pakete und diagnostische \acs{CAN}-Pakete. 
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{Miller_canbus-ford2010}
 \label{fig:canbus-ford2010}
@@ -28,7 +29,23 @@ In Automotive Netzwerken lassen sich zwei Arten von \acs{CAN}-Paketen finden: no
 \end{figure}
 
 \subsubsection{Normale \acs{CAN}-Pakete}
-Normale Pakete werden von \acsp{ECU} gesendet und können entweder Informationen oder Befehle enthalten. Typischerweise werden sie alle Millisekunden gesendet. Auf Anwendungsebene enthalten die \acs{CAN}-Pakete einen Identifier, die zu übertragenden Daten und manchmal noch eine Prüfsumme, um sicherzustellen, dass das Paket korrekt übertragen wurde. Der Identifier gibt sowohl an, für welche \acsp{ECU} das Paket bestimmt ist, als auch, welche Priorität das Paket hat. \cite[vgl.][9]{Miller.2013}
+Normale Pakete werden von \acsp{ECU} gesendet und können entweder Informationen oder Befehle enthalten. Typischerweise werden sie alle Millisekunden gesendet. Auf Anwendungsebene enthalten die \acs{CAN}-Pakete einen Identifier, die zu übertragenden Daten und manchmal noch eine Prüfsumme, um sicherzustellen, dass das Paket korrekt übertragen wurde. Der Identifier gibt sowohl an, für welche \acsp{ECU} das Paket bestimmt ist, als auch, welche Priorität das Paket hat. \cite[vgl.][9]{Miller.2013}\\
+Das Format einer \acs{CAN}-Botschaft ist in Abbildung \ref{fig:CanBotschaft} dargestellt. Es besteht aus folgenden Bestandteilen:
+\subparagraph{Header} CAN ist ein Broadcast-System, bei dem jeder Sender seine Botschaften mit einem eindeutigen Message Identifier markiert.
+\subparagraph{Message Identifier} Der Message Identifier kennzeichnet eine Botschaft und dient zur eindeutigen Identifizierung. Er kann entweder 11 Bit (CAN 2.0A) oder 29 Bit (CAN 2.0B) lang sein und enthält zusätzlich 1 bis 3 Steuerbits.
+\subparagraph{Control Bits} Die Steuerbits im Control-Feld umfassen den Data Length Code (DLC), der die Anzahl der übertragenen Nutzdatenbytes angibt, sowie eine 15-Bit-Prüfsumme, auch genannt Cyclic Redundancy Check (CRC) zur Fehlererkennung.
+\subparagraph{Payload} Die Nutzdaten (Payload) einer Botschaft können zwischen 0 und 8 Datenbytes umfassen.
+\subparagraph{Acknowledge und End of Frame} Die CAN-Controller der Empfänger senden eine positive Empfangsbestätigung oder eine Fehlermeldung (Error Frame) innerhalb des Acknowledge und End of Frame Felds.
+\subparagraph{Stuffing Bits} Stuffing Bits werden verwendet, um den Bittaktgenerator von Empfängern zu synchronisieren. Sie werden eingefügt, um sicherzustellen, dass nicht mehr als fünf aufeinanderfolgende Bits denselben Wert haben. \cite[61\psqq]{Zimmermann.2014}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Zimmermann_CanBotschaft}
+\label{fig:CanBotschaft}
+\caption{Format einer \acs{CAN}-Botschaft}
+\quelle{\cite[61]{Zimmermann.2014}}
+\end{figure}
+
 
 \subsubsection{Diagnostische \acs{CAN}-Pakete}
 Diagnostische Pakete tauchen während des normalen Betriebs des Autos im Normalfall nicht auf. Sie werden von Diagnose-Werkzeugen gesendet, die beispielsweise von Mechanikern genutzt werden um mit den \acsp{ECU} im Auto zu kommunizieren. So können Mängel und Fehlfunktionen entdeckt oder andere Informationen gewonnen werden. Das Format von diagnostischen \acs{CAN}-Paketen ähnelt dem von normalen Paketen, erfolgt jedoch meist nach strengeren Konventionen. Standards hierfür sind zum Beispiel ISO-TP, ISO 14229 und ISO 14230. \cite[vgl.][10]{Miller.2013}
@@ -58,8 +75,87 @@ Für den Aufbau eines Netzwerks mit den zwei Protokollen gibt es zwei gängige A
 Der zweite Ansatz ist skalierbarer, da ohne großen Aufwand neue Knoten hinzugefügt werden können. Der erste Ansatz ermöglicht jedoch eine deutlich höhere Bandbreite bei der Kommunikation zwischen den Einheiten. \cite[58]{Fijalkowski.2011}
 
 
-\subsection{Schnittstellen}
+\subsection{FlexRay}
+Der \ac{CAN} Standard weist neben seinen Stärken auch einige Schwächen auf. Beispielsweise ist die realistisch erreichbare Datenrate beschränkt, zudem lassen sich sehr hohe Datenraten nur mit kurzen Stichverbindungen erreichen. Außerdem verfügt das System nur über einen Kanal und versagt somit bei Ausfall der Busverbindung. Aus diesen Gründen hielten viele Fachleute eine Neuentwicklung für notwendig und sinnvoll \cite[96]{Zimmermann.2014}. Daher wurde FlexRay als Ersatz für \acs{CAN} entwickelt. In der Praxis wird es allerdings größtenteils mehr als Ergänzung als als vollständiger Ersatz eingesetzt \cite[97]{Zimmermann.2014}. Dies könnte an den höheren Kosten aufgrund größerer Komplexität von FlexRay liegen.s FlexRay ermöglicht Aufbauten in Linien- und Sterntopologien. Diese können einkanalig oder zweikanalig sein.\\
+Der Aufbau einer FlexRay-Botschaft ist in Abbildung \ref{fig:FlexRayBotschaft} veranschaulicht. Zu Beginn einer FlexRay-Botschaft stehen 5 Steuerbits, in denen Sonderinformationen über die Nachricht angezeigt werden können. Anschließend folgen die Frame ID mit dem Zeitslot der Botschaft, die Nutzdatenlänge, eine Cyclic-Redundancy-Check-Prüfsumme und ein Zykluszähler. 
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Zimmermann_FlexrayBotschaft}
+\label{fig:FlexRayBotschaft}
+\caption{Aufbau einer FlexRay-Botschaft}
+\quelle{\cite[101]{Zimmermann.2014}}
+\end{figure}
+
+
+\subsection{Media Oriented System Transport}
+Das \ac{MOST} Protokoll wird vor allem in Infotainment-Systemen von Autos eingesetzt. Anstelle von Kabeln werden hier Lichtwellenleiter verwendet. Somit ist das Signal unempfänglich gegenüber elektromagnetischer Einstrahlung. Es wird unterschieden zwischen \acs{MOST}25, \acs{MOST}50 und \acs{MOST}150, welche sich in Paketgröße und Bandbreite unterscheiden. Ein \acs{MOST}-Netzwerk ist meist als Ringtopologie aufgebaut (vergleiche Abbildung \ref{fig:MOST-NetworkMasterSlave}). Auch im \acs{MOST}-Protokoll gibt es Master- und Slave-Knoten. Der Master-Knoten ist häufig ein Gateway zu einem \acs{CAN}-Bus.\\
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Grzemba_MOST_NetworkMasterSlave}
+\label{fig:MOST-NetworkMasterSlave}
+\caption{Ringtopologie eines \acs{MOST}-Bus}
+\quelle{\cite[40]{Grzemba.2007}}
+\end{figure}
+
+\subsubsection{Paketaufbau}
+Der Aufbau eines \acs{MOST}25-Pakets ist in Abbildung \ref{fig:MOST-frame} dargestellt. Es folgt eine kurze Erklärung der Einzelnen Bestandteile.
+\subparagraph{Anfangsfeld (Preamble)} Das Anfangsfeld wird vom TimingMaster generiert und dient der Synchronisation der Slaves.
+\subparagraph{Abgrenzungsfeld (Boundary Descriptor)}Das Abgrenzungsfeld definiert die in Vier-Byte-Schritten verschiebbare Grenze zwischen Stream- und Paketdaten.
+\subparagraph{Datenfeld (stream data, packet data)}Das Datenfeld besteht aus 60 Bytes die nach Bedarf zwischen Streamdaten und Paketdaten aufgeteilt werden können.
+\subparagraph{Kontrollbytes (Frame Control)}Die Kontrollbytes am Ende dienen der Kontrolle des Frames.
+\subparagraph{Paritätsfeld (Parity Bit)}Das Paritätsfeld ermöglicht das Erkennen von Bit-Fehlern im Frame.
+\\
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Grzemba_MOST_frame}
+\label{fig:MOST-frame}
+\caption{Aufbau eines \acs{MOST}25-Pakets}
+\quelle{\cite[88]{Grzemba.2007}}
+\end{figure}
+
+
+\subsection{Automotive Ethernet}
+Die Vielzahl inkompatibler und nur in der Automobilindustrie verwendeter Lösungen resultierte in hohen Kosten und kontinuierlichem Weiterentwicklungsaufwand. Zudem steigt der Bandbreitenbedarf. Daher wird das im Bürobereich etablierte Konzept Ethernet/IP relevanter für den Automobilbereich. \cite[138]{Zimmermann.2014}\\
+Die in diesem Standard verwendeten Protokolle \ac{IP}, \ac{TCP} und \ac{UDP} werden außerdem bereits von den meisten computerähnlichen Geräten unterstützt. Das ermöglicht eine transparente Kommunikation und vereinfacht die Integration von Consumergeräten erheblich \cite{Zimmermann.2014}. Ethernet war ursprünglich ein Linienbussystem, wird heutzutage aber meistens als Sterntopologie mit Switches an Kopplungspunkten umgesetzt. \\
+In Abbildung \ref{fig:EthernetPaket} ist der Aufbau eines Ethernet-Pakets dargestellt. 
+Die Präambel und der Start Frame Delimiter spielen eine Rolle bei der Taktsynchronisation bei manchen Physical Layern. Die Ziel- und Quell-MAC-Adresse dienen der Geräteadressierung. Das VLAN-Tag erlaubt die Bildung von Unternetzen. Das Typfeld kennzeichnet den Typ des Inhalts des darauf folgenden Datenfelds. Das Datenfeld enthält den eigentlichen Nachrichteninhalt. Am Ende jedes Pakets befindet sich noch die Frame Check Sequence zur Detektion von Übertragungsfehlern. Beim Eintritt eines Übertragungsfehlers wird die Botschaft automatisch vom Empfänger verworfen. \cite[140]{Zimmermann.2014}\\
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Zimmermann_EthernetPaket}
+\label{fig:EthernetPaket}
+\caption{Aufbau eines Ethernet-Pakets}
+\quelle{\cite[140]{Zimmermann.2014}}
+\end{figure}
+
+
+
+\section{Schnittstellen}
+Moderne Autos verfügen über eine Vielzahl von Schnittstellen, um eine Verbindung mit dem Fahrzeug herzustellen, sei es, um ein Multimediagerät zu verbinden oder zu Diagnosezwecken. Diese Schnittstellen können aber auch eventuell einem potentiellen Angreifer den Zugriff auf das Fahrzeugnetzwerk ermöglichen. Diese möglichen Angriffsvektoren können nach Checkoway et al \cite[1]{Checkoway.2011} in drei Kategorien eingeteilt werden. Diese drei Kategorien sind \glqq indirect physical access\grqq , \glqq short-range physical access\grqq{} und \glqq long-range physical access\grqq . Es folgt eine Beschreibung der Kategorien mit einer Übersicht der typischsten Schnittstellen eines modernen Autos.
+
+\subsection{Indirect Physical Access}
+Zu dieser Kategorie zählen sämtliche physische Schnittstellen, die direkt oder indirekt auf die internen Netzwerke des Autos zugreifen. Bei diesen Schnittstellen müsste ein Angreifer, um darauf zuzugreifen, mindestens einmalig physischen Zugang zum Fahrzeug haben oder über einen Vermittler arbeiten. 
+
+
 \subsubsection{OBD-II Port} \label{OBD-II}
+Der \ac{OBD}-II Port ist eine für Fachleute gedachte Schnittstelle auf den \acs{CAN}-Bus zu Diagnosezwecken.	Er befindet sich meist im Fußraum auf der Fahrerseite. Der Port umfasst 16 Pins, obwohl durch den Standard nur die Belegung von neun Pins vorgeschrieben ist. Die zusätzlichen Pins werden je nach Anbieter teilweise für den Zugriff auf zusätzliche Bussysteme verwendet. \cite[2]{Klinedinst.2016} \\
+Üblicherweise wird an diesen Port ein Diagnosegerät des Herstellers oder einer Werkstatt angeschlossen. Das Diagnosegerät wird entweder von meist Windows-basierten Personal Computern programmiert oder fungieren als Mittler, um direkt mittels Laptop auf Port zuzugreifen \cite[3]{Checkoway.2011}. In beiden Fällen hat ein Windows-basierter PC direkt oder indirekt Zugriff auf das Netzwerk des Fahrzeugs. Der Hauptzweck dieses Gerätes ist es, Daten aus den \acsp{ECU} des Fahrzeugs zu sammeln. Das erfolgt über das Senden von diagnostischen \acs{CAN}-Paketen. Die betroffenen \acsp{ECU} senden anschließend die angefragten Daten. Diese Daten können dann beispielsweise zur Behandlung von Problemen verwendet werden.\\
+Verbrauchermarktanbieter konnten allerdings die Kommunikationsarchitektur durch Reverse-Engineering verstehen und für andere Zwecke nutzen, zum Beispiel Pay-By-Mile-Versicherungen, Fahrzeuggebrauchstracking und kommerzielles Flottenmanagement \cite[3]{Klinedinst.2016}. \\
+
+\subsubsection{Ladeanschluss eines Elektro-Autos}
+Elektronische Fahrzeuge tanken nicht an Tankstellen wie ihre kraftstoffbetriebenen Pendants, sondern können an einer Steckdose oder speziellen, teilweise öffentlichen Ladestationen aufgeladen werden. Beim Ladevorgang an Ladestationen werden allerdings nicht nur elektrischer Strom sondern auch Daten ausgetauscht \cite[3]{Checkoway.2011}. Beispiele dafür können die Steuerung des Ladevorgangs, Authentifizierung und Autorisierung und Informationen über Ladezeit, Ladeleistung, Energieverbrauch und Batteriezustand sein. Dieser Datenaustausch ermöglicht einen effizienten und sicheren Ladevorgang, eine Abrechnung des bereitgestellten Stroms und eine Überwachung der Ladeinfrastruktur. Zudem können eine unautorisierte Nutzung der Ladestation oder eine Überlastung des Stromnetzes verhindert werden. 
+
+\subsubsection{Entertainment}
+
+
+
+
+\subsubsection{Bluetooth}
+Um Features wie eine Freisprecheinrichtung oder das Hören eigener Musik vom Smartphone zu realisieren, bietet das Infotainment-System der meisten modernen Autos eine Bluetooth-Schnittstelle. 
 
 \section{Cyber Security}
 \subsection{Security Lifecycle}
