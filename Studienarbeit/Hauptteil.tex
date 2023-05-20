@@ -169,11 +169,11 @@ Des Weiteren sind viele moderne Automobile mit sogenannten Passive Keyless Entry
 RKE-Systeme nutzen verschiedene drahtlose Kommunikationstechnologien wie Radiofrequenz (RF) oder Infrarot (IR), um die Signale zwischen der Fernbedienung und dem Fahrzeug zu übertragen \cite[4]{Checkoway.2011}. RF-basierte Systeme sind am weitesten verbreitet, da sie eine größere Reichweite bieten und nicht auf Sichtverbindung angewiesen sind.
 
 \subsubsection{Reifendruck-Kontrollsystem}
-Ein weiteres drahtloses Netzwerk in Fahrzeugen stellt das \ac{RDKS} oder auf englisch Tire Pressure Monitoring System (TPMS) dar. Die Integration eines solchen Systems ist in vielen Ländern gesetzlich vorgeschrieben. Neben der Vermeidung von Reifenpannen verspricht die Warnung vor unteraufgepumpten Reifen eine Steigerung der Verkehrssicherheit und Kraftstoffeffizienz, da der richtige Reifendruck die Traktion, den Bremsweg und den Rollwiderstand verbessert. Das Reifendrucküberwachungssystem misst kontinuierlich den Luftdruck in allen Reifen von Personenkraftwagen, Lastwagen und Mehrzweckfahrzeugen und warnt den Fahrer, wenn ein Reifen signifikant unteraufgepumpt ist. Es gibt sowohl direkte als auch indirekte Messverfahren. Bei einem direkten Messsystem werden batteriebetriebene Drucksensoren in jedem Reifen verwendet, um den Reifendruck zu messen, und die Daten werden über einen Funkfrequenz (RF)-Sender übertragen, da eine Verkabelung von einem rotierenden Reifen zur elektronischen Steuereinheit des Fahrzeugs schwierig umzusetzen ist. Die empfangende Reifendrucksteuereinheit analysiert die Daten und kann über das \ac{CAN} Ergebnisse oder Befehle an den zentralen Bordcomputer senden, um beispielsweise eine Warnmeldung auf dem Fahrzeugdashboard auszulösen. Indirekte Messsysteme leiten den Druckunterschied zwischen den Reifen aus den Unterschieden in der Rotationsgeschwindigkeit ab, die mithilfe der \ac{ABS}-Sensoren gemessen werden können. Ein Reifen mit niedrigerem Druck muss schneller rotieren, um die gleiche Strecke wie ein Reifen mit höherem Druck zurückzulegen. Die Nachteile dieses Verfahrens sind jedoch eine geringere Genauigkeit, die Kalibrierung durch den Fahrer und die Unfähigkeit, den gleichzeitigen Druckverlust in allen Reifen zu erkennen. Daher werden primär direkte Reifenkontrollsysteme verwendet. \cite[1]{Rouf.2010}
+Ein weiteres drahtloses Netzwerk in Fahrzeugen stellt das \ac{RDKS} oder auf englisch Tire Pressure Monitoring System (TPMS) dar. Die Integration eines solchen Systems ist in vielen Ländern gesetzlich vorgeschrieben. Neben der Vermeidung von Reifenpannen verspricht die Warnung vor falschem Reifendruck eine Steigerung der Verkehrssicherheit und Kraftstoffeffizienz, da der richtige Reifendruck die Traktion, den Bremsweg und den Rollwiderstand verbessert. Das Reifendrucküberwachungssystem misst kontinuierlich den Luftdruck in allen Reifen von Personenkraftwagen, Lastwagen und Mehrzweckfahrzeugen und warnt den Fahrer, wenn ein Reifen signifikant zu wenig aufgepumpt ist. Es gibt sowohl direkte als auch indirekte Messverfahren. Bei einem direkten Messsystem werden batteriebetriebene Drucksensoren in jedem Reifen verwendet, um den Reifendruck zu messen, und die Daten werden über einen Funkfrequenz (RF)-Sender übertragen, da eine Verkabelung von einem rotierenden Reifen zur elektronischen Steuereinheit des Fahrzeugs schwierig umzusetzen ist. Die empfangende Reifendrucksteuereinheit analysiert die Daten und kann über das \ac{CAN} Ergebnisse oder Befehle an den zentralen Bordcomputer senden, um beispielsweise eine Warnmeldung auf dem Fahrzeugdashboard auszulösen. Indirekte Messsysteme leiten den Druckunterschied zwischen den Reifen aus den Unterschieden in der Rotationsgeschwindigkeit ab, die mithilfe der \ac{ABS}-Sensoren gemessen werden können. Ein Reifen mit niedrigerem Druck muss schneller rotieren, um die gleiche Strecke wie ein Reifen mit höherem Druck zurückzulegen. Die Nachteile dieses Verfahrens sind jedoch eine geringere Genauigkeit, die Kalibrierung durch den Fahrer und die Unfähigkeit, den gleichzeitigen Druckverlust in allen Reifen zu erkennen. Daher werden primär direkte Reifenkontrollsysteme verwendet. \cite[1]{Rouf.2010}
 
 \subsubsection{Wireless LAN}
 Viele Hersteller statten ihre modernen Autos heutzutage mit einer \ac{WLAN}-Schnittstelle aus \cite[4]{Checkoway.2011}. Die Technologie wird für verschiedene Anwendungsfälle eingesetzt. Viele moderne Autos sind mit Infotainment-Systemen ausgestattet, die WLAN verwenden, um eine drahtlose Verbindung zum Internet herzustellen. Dadurch können Insassen auf Streaming-Dienste, Musik, Online-Radio, und andere Online-Inhalte zugreifen. \acs{WLAN} ermöglicht auch Over-the-Air-Updates für das Infotainment-System, um Softwareaktualisierungen und neue Funktionen bereitzustellen. Auch für den Rest des Fahrzeugs lassen sich je nach Modell teilweise Softwareupdates über \acs{WLAN} herunterladen. Zum Beispiel die Autos von Tesla bieten dieses Feature. Darüber hinaus ermöglicht \acs{WLAN} den Passagieren im Auto in manchen Fahrzeugen die drahtlose Verbindung ihrer mobilen Geräte wie Smartphones, Tablets und Laptops mit dem Internet.
-Schließlich werden \acs{WLAN}-basierte Standards in der Fahrzeug-zu-Fahrzeug-Kommunikation eingesetzt. Diese Art der Kommunikation wird auch Dedicated Short-Range Communications (DSRC) genannt \cite[4]{Checkoway.2011}. Durch den Datenaustausch zwischen Fahrzeugen sollen beispielsweise Kollisionen frühzeitig erkannt und verhindert werden. \\
+Schließlich werden \acs{WLAN}-basierte Standards ebenfalls in der Fahrzeug-zu-Fahrzeug-Kommunikation eingesetzt. Diese Art der Kommunikation wird auch Dedicated Short-Range Communications (DSRC) genannt \cite[4]{Checkoway.2011}. Durch den Datenaustausch zwischen Fahrzeugen sollen beispielsweise Kollisionen frühzeitig erkannt und verhindert werden. \\
 Um die genannten Features umsetzen zu können, ist größtenteils eine Verbindung der \acs{ECU} mit der \acs{WLAN}-Schnittstelle zum Controller Area Network notwendig. Somit kann in vielen Fahrzeugen auch über \acs{WLAN} theoretisch indirekt auf den \acs{CAN}-Bus zugegriffen werden.
 
 
@@ -190,6 +190,10 @@ Das moderne Automobil umfasst eine Vielzahl von Empfängern für weitreichende S
 Durch diese Kanäle können viele Funktionen bereitgestellt werden. Dazu gehören die Unterstützung von Sicherheit (Unfallberichterstattung), Diagnose (frühzeitige Warnung bei mechanischen Problemen), Diebstahlschutz (Fernverfolgung und Deaktivierung) und Komfort (Zugriff auf Daten wie Fahrtrichtungen oder Wetterinformationen). \cite[5]{Checkoway.2011} \\
 Da diese Kanäle meist eine hohe Bandbreite bieten, über große Distanzen und in beide Richtungen funktionieren und das direkte Ansteuern von individuellen Fahrzeugen ermöglichen, sind diese Schnittstellen für potenzielle Angreifer besonders interessant \cite[5]{Checkoway.2011}.
 
+%evt Automatisiertes/autonomes Fahren
+
+%evt Architektur
+
 
 \section{Cyber Security}
 \subsection{Security versus Safety}
@@ -200,7 +204,15 @@ Der deutsche Begriff \glqq Sicherheit\grqq{} ist mehrdeutig, was ihn für eine g
 \glqq Der Begriff Security bezeichnet die Informations- und Datensicherheit bzw. die Angriffssicherheit eines Systems. Security umfasst alle Eigenschaften und Maßnahmen, die das System vor absichtlichen und unabsichtlichen Bedrohungen
 von außen schützen. Security schützt somit das System vor negativen Einflüssen von Mensch und Umwelt, wie etwa Bedrohungen und Angriffe. Während sich die sog. klassische IT-Security auf die Absicherung der informationstechnischen Systeme eines Unternehmens wie etwa Computer, Server, Netzwerke und Internetanbindungen konzentriert, zielt die Cybersecurity im Kontext des Automotive Bereichs auf die Absicherung deren Produkte ab.\grqq{} \cite[2\psq]{Wurm.2022}\\
 
-Safety bezieht sich somit mehr auf die Sicherheit des Nutzers während sich die Security eines Systems mehr auf die Daten und das System an sich fokussiert.
+Safety bezieht sich somit mehr auf die Sicherheit des Nutzers während sich die Security eines Systems mehr auf die Sicherheit von Daten, Informationen und des Systems an sich fokussiert. Im Automotive-Kontext ist Security in vielen Fällen eine Voraussetzung für die Safety von Fahrzeugen, da durch Security-Maßnahmen verhindert werden soll, dass das Fahrzeug in einen Safety-kritischen Zustand gebracht wird. In anderen Fällen stehen sich Safety- und Security-Ziele aber auch teilweise gegenseitig im Weg. Zum Beispiel kann durch erhöhte Security-Maßnahmen die Latenz der Fahrzeugsysteme ansteigen, was sich wiederum negativ auf die Safety auswirkt. Daher kann es eine Herausforderung sein, beide Disziplinen gemeinsam ausreichend zu behandeln.
+
+%evt Authentisierung, Authentifizierung, Autorisierung
+
+%evt Risikomanagement
+
+\subsection{Sicherheitsziele}
+
+%evt Kryptographie
 
 \subsection{Security Lifecycle}
 \cite{Wurm.2022}
@@ -208,6 +220,9 @@ Safety bezieht sich somit mehr auf die Sicherheit des Nutzers während sich die 
 
 
 \chapter{Angriffsflächen}
+\section{Vorgehensweise}
+\cite[36]{Wurm.2022}
+
 \subsection{Bootvorgang}
 \cite{Wurm.2022}
 
