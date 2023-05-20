@@ -12,7 +12,7 @@ Im Inneren von Autos befinden sich heutzutage eine Vielzahl elektronischer Syste
 \quelle{\cite[2]{MohammadAshjaei.2021}}
 \end{figure}
 
-Für die Venetzung der \acsp{ECU} kommen verschiedene Technologien zum Einsatz (siehe Abbildung \ref{fig:communication-protocols}). Die relevantesten davon werden im Folgenden genauer erläutert. Die wichtigste  davon ist im Automotive-Bereich der sogenannte \acs{CAN}-Standard.
+Für die Vernetzung der \acsp{ECU} kommen verschiedene Technologien zum Einsatz (siehe Abbildung \ref{fig:communication-protocols}). Die relevantesten davon werden im Folgenden genauer erläutert. Die wichtigste  davon ist im Automotive-Bereich der sogenannte \acs{CAN}-Standard.
 
 \subsection{Controller Area Network}
 Die elektronischen Kontrolleinheiten eines Autos sind typischerweise über einen oder mehrere Busse, die auf dem \ac{CAN}-Standard basieren, miteinander verbunden. Hierbei kommunizieren die \acsp{ECU} über \acs{CAN}-Pakete. Diese werden an alle Komponenten gesendet, welche dann jeweils basierend auf dem Inhalt entscheiden, ob das Paket für sie bestimmt ist oder nicht. Eine Identifikation der Quelle oder Authentisierung gibt es in diesem Standard nicht. \cite[vgl.][7]{Miller.2013} \\
@@ -150,14 +150,58 @@ Verbrauchermarktanbieter konnten allerdings die Kommunikationsarchitektur durch 
 Elektronische Fahrzeuge tanken nicht an Tankstellen wie ihre kraftstoffbetriebenen Pendants, sondern können an einer Steckdose oder speziellen, teilweise öffentlichen Ladestationen aufgeladen werden. Beim Ladevorgang an Ladestationen werden allerdings nicht nur elektrischer Strom sondern auch Daten ausgetauscht \cite[3]{Checkoway.2011}. Beispiele dafür können die Steuerung des Ladevorgangs, Authentifizierung und Autorisierung und Informationen über Ladezeit, Ladeleistung, Energieverbrauch und Batteriezustand sein. Dieser Datenaustausch ermöglicht einen effizienten und sicheren Ladevorgang, eine Abrechnung des bereitgestellten Stroms und eine Überwachung der Ladeinfrastruktur. Zudem können eine unautorisierte Nutzung der Ladestation oder eine Überlastung des Stromnetzes verhindert werden. 
 
 \subsubsection{Entertainment}
+Eine Vielzahl der physischen Schnittstellen eines Autos ist außerdem der Unterhaltung des Benutzers gewidmet. Beispielsweise bieten die meisten Autos mindestens einen USB- und einen Aux-Anschluss, damit Musik von externen Geräten abgespielt werden kann. Außerdem sind viele Autos mit einem CD-Laufwerk ausgestattet. Meist werden mehrere Audioformate unterstützt. Häufig sind die Entertainment-Systeme mit einem \acs{CAN}-Bus verbunden \cite[4]{Checkoway.2011}, um beispielsweise ganzheitliche Firmwareupdates zu ermöglichen. Außerdem kann das Infotainment-System Informationen von anderen Fahrzeugsystemen abrufen, um dem Fahrer relevante Daten anzuzeigen. Dazu gehören Informationen wie Fahrzeuggeschwindigkeit, Motordrehzahl oder Kraftstoffverbrauch, die dann auf dem Display angezeigt werden können.
 
-
+\subsection{Short-Range Wireless Access}
+Diese Kategorie umfasst Schnittstellen, deren Nutzung zwar drahtlos erfolgt, aber dennoch eine geringe physische Distanz zum Fahrzeug erfordert. Ein potenzieller Angreifer müsste sich für die Nutzung dieser Schnittstellen entweder in der Nähe befinden oder einen Transmitter in der Umgebung platzieren.
 
 
 \subsubsection{Bluetooth}
-Um Features wie eine Freisprecheinrichtung oder das Hören eigener Musik vom Smartphone zu realisieren, bietet das Infotainment-System der meisten modernen Autos eine Bluetooth-Schnittstelle. 
+Um Features wie eine Freisprecheinrichtung oder das Hören eigener Musik vom Smartphone zu realisieren, bieten die Infotainment-Systeme der meisten modernen Autos eine Bluetooth-Schnittstelle. Bluetooth ermöglicht die drahtlose Kommunikation zwischen dem Fahrzeug und externen Geräten wie Smartphones. Durch die Verbindung des Infotainment-Systems mit dem Controller Area Network des Fahrzeugs kann es mit anderen elektronischen Steuergeräten (\acsp{ECU}) kommunizieren. Diese Integration ermöglicht eine nahtlose Interaktion zwischen dem Infotainment-System und anderen Fahrzeugsystemen.
+Die Bluetooth-Verbindung eröffnet Möglichkeiten für die Nutzung von verschiedenen Funktionen und Diensten. Eine der häufigsten Anwendungen ist die Freisprecheinrichtung, die es dem Fahrer ermöglicht, Anrufe über das Infotainment-System zu tätigen und entgegenzunehmen, ohne das Telefon in die Hand nehmen zu müssen. Das Infotainment-System wird über Bluetooth mit dem Telefon gekoppelt und kann auf die Telefonkontakte zugreifen, Anrufe initiieren und Anrufinformationen auf dem Display anzeigen.
+Darüber hinaus ermöglicht die Bluetooth-Schnittstelle auch die drahtlose Übertragung von Audiodateien vom Smartphone zum Infotainment-System. Fahrer und Insassen können ihre eigenen Musikbibliotheken, Streaming-Dienste oder Podcasts über das Fahrzeuglautsprechersystem abspielen. Das Infotainment-System fungiert als Empfänger für das Audiosignal, das vom Smartphone gesendet wird.
+
+\subsubsection{Remote Keyless Entry}
+\ac{RKE} Systeme, auch als Funkfernbedienung oder Keyless-Entry-Systeme bekannt, sind Technologien, die es Fahrzeugbesitzern ermöglichen, ihr Fahrzeug aus der Ferne zu verriegeln und zu entriegeln, ohne einen physischen Schlüssel verwenden zu müssen. Diese Systeme bieten eine bequeme und sichere Möglichkeit, auf das Fahrzeug zuzugreifen.
+Ein typisches RKE-System besteht aus zwei Hauptkomponenten: einem Funksender (Fernbedienung) und einem Empfänger, der im Fahrzeug eingebaut ist. Die Fernbedienung ist normalerweise eine kleine tragbare Vorrichtung, die über eine oder mehrere Tasten verfügt. Durch Betätigen der Tasten sendet die Fernbedienung ein verschlüsseltes Funksignal mit einer bestimmten Reichweite an den Empfänger im Fahrzeug.
+Der Empfänger im Fahrzeug erkennt das Signal der Fernbedienung und interpretiert es. Wenn das empfangene Signal korrekt und authentifiziert ist, führt das RKE-System die gewünschte Aktion aus. Das kann das Entriegeln oder Verriegeln der Türen, das Aktivieren oder Deaktivieren der Diebstahlalarmanlage oder das Öffnen der Kofferraumklappe sein. In einigen Fahrzeugen können auch weitere Funktionen über die Fernbedienung gesteuert werden, wie das Starten des Motors oder das Ein- und Ausschalten der Fahrzeugbeleuchtung.\\
+Des Weiteren sind viele moderne Automobile mit sogenannten Passive Keyless Entry and Start Systemen ausgestattet. Diese basieren auf einem bidirektionalen Challenge-Response-Schema. Das Auto sendet eine Challenge, woraufhin der Autoschlüssel mit einer kryptographischen Antwort (Response) reagiert. Bei einer gültigen Antwort werden die Türen entriegelt, das Alarmsystem deaktiviert und das Starten des Motors ermöglicht. Eine Benutzerinteraktion ist nicht notwendig, der Schlüssel muss sich lediglich in einem Umkreis von in der Regel etwa einem Meter zum Fahrzeug befinden. \cite[930]{Garcia.2016} \\
+RKE-Systeme nutzen verschiedene drahtlose Kommunikationstechnologien wie Radiofrequenz (RF) oder Infrarot (IR), um die Signale zwischen der Fernbedienung und dem Fahrzeug zu übertragen \cite[4]{Checkoway.2011}. RF-basierte Systeme sind am weitesten verbreitet, da sie eine größere Reichweite bieten und nicht auf Sichtverbindung angewiesen sind.
+
+\subsubsection{Reifendruck-Kontrollsystem}
+Ein weiteres drahtloses Netzwerk in Fahrzeugen stellt das \ac{RDKS} oder auf englisch Tire Pressure Monitoring System (TPMS) dar. Die Integration eines solchen Systems ist in vielen Ländern gesetzlich vorgeschrieben. Neben der Vermeidung von Reifenpannen verspricht die Warnung vor unteraufgepumpten Reifen eine Steigerung der Verkehrssicherheit und Kraftstoffeffizienz, da der richtige Reifendruck die Traktion, den Bremsweg und den Rollwiderstand verbessert. Das Reifendrucküberwachungssystem misst kontinuierlich den Luftdruck in allen Reifen von Personenkraftwagen, Lastwagen und Mehrzweckfahrzeugen und warnt den Fahrer, wenn ein Reifen signifikant unteraufgepumpt ist. Es gibt sowohl direkte als auch indirekte Messverfahren. Bei einem direkten Messsystem werden batteriebetriebene Drucksensoren in jedem Reifen verwendet, um den Reifendruck zu messen, und die Daten werden über einen Funkfrequenz (RF)-Sender übertragen, da eine Verkabelung von einem rotierenden Reifen zur elektronischen Steuereinheit des Fahrzeugs schwierig umzusetzen ist. Die empfangende Reifendrucksteuereinheit analysiert die Daten und kann über das \ac{CAN} Ergebnisse oder Befehle an den zentralen Bordcomputer senden, um beispielsweise eine Warnmeldung auf dem Fahrzeugdashboard auszulösen. Indirekte Messsysteme leiten den Druckunterschied zwischen den Reifen aus den Unterschieden in der Rotationsgeschwindigkeit ab, die mithilfe der \ac{ABS}-Sensoren gemessen werden können. Ein Reifen mit niedrigerem Druck muss schneller rotieren, um die gleiche Strecke wie ein Reifen mit höherem Druck zurückzulegen. Die Nachteile dieses Verfahrens sind jedoch eine geringere Genauigkeit, die Kalibrierung durch den Fahrer und die Unfähigkeit, den gleichzeitigen Druckverlust in allen Reifen zu erkennen. Daher werden primär direkte Reifenkontrollsysteme verwendet. \cite[1]{Rouf.2010}
+
+\subsubsection{Wireless LAN}
+Viele Hersteller statten ihre modernen Autos heutzutage mit einer \ac{WLAN}-Schnittstelle aus \cite[4]{Checkoway.2011}. Die Technologie wird für verschiedene Anwendungsfälle eingesetzt. Viele moderne Autos sind mit Infotainment-Systemen ausgestattet, die WLAN verwenden, um eine drahtlose Verbindung zum Internet herzustellen. Dadurch können Insassen auf Streaming-Dienste, Musik, Online-Radio, und andere Online-Inhalte zugreifen. \acs{WLAN} ermöglicht auch Over-the-Air-Updates für das Infotainment-System, um Softwareaktualisierungen und neue Funktionen bereitzustellen. Auch für den Rest des Fahrzeugs lassen sich je nach Modell teilweise Softwareupdates über \acs{WLAN} herunterladen. Zum Beispiel die Autos von Tesla bieten dieses Feature. Darüber hinaus ermöglicht \acs{WLAN} den Passagieren im Auto in manchen Fahrzeugen die drahtlose Verbindung ihrer mobilen Geräte wie Smartphones, Tablets und Laptops mit dem Internet.
+Schließlich werden \acs{WLAN}-basierte Standards in der Fahrzeug-zu-Fahrzeug-Kommunikation eingesetzt. Diese Art der Kommunikation wird auch Dedicated Short-Range Communications (DSRC) genannt \cite[4]{Checkoway.2011}. Durch den Datenaustausch zwischen Fahrzeugen sollen beispielsweise Kollisionen frühzeitig erkannt und verhindert werden. \\
+Um die genannten Features umsetzen zu können, ist größtenteils eine Verbindung der \acs{ECU} mit der \acs{WLAN}-Schnittstelle zum Controller Area Network notwendig. Somit kann in vielen Fahrzeugen auch über \acs{WLAN} theoretisch indirekt auf den \acs{CAN}-Bus zugegriffen werden.
+
+
+
+\subsection{Long-Range Wireless Access}
+Zu dieser letzten Kategorie zählen alle Zugriffskanäle, die aus großer Entfernung, nämlich mehr als einem Kilometer, zugegriffen werden kann. Immer mehr Autos bieten auch derartige Schnittstellen. Diese lassen sich in zwei Kategorien einteilen: Broadcast Kanäle und Adressierbare Kanäle. \cite[4]{Checkoway.2011}
+
+\subsubsection{Broadcast Kanäle}
+Broadcast Kanäle sind Kanäle, die nicht speziell auf ein bestimmtes Fahrzeug ausgerichtet sind, sondern von Empfängern nach Bedarf empfangen werden können. Neben der externen Angriffsfläche können weitreichende Broadcastmedien als Steuerungskanäle attraktiv sein (z. B. zum Auslösen von Angriffen), da sie schwer zuzuordnen sind, mehrere Empfänger gleichzeitig steuern können und Angreifer keine genaue Adressierung ihrer Opfer benötigen.
+Das moderne Automobil umfasst eine Vielzahl von Empfängern für weitreichende Signale: \ac{GPS}, Satellitenradio, Digitalradio und das Radio Data System (RDS) und der Traffic Message Channel (TMC), die als digitale Unterträger auf vorhandenen FM-Bändern übertragen werden. Die Reichweite solcher Signale hängt von der Sendeleistung, Modulation, Gelände und Störungen ab. Im Allgemeinen werden diese Kanäle in das Mediasystem eines Autos (Radio, CD-Player, Satellitenempfänger) implementiert, das, wie bereits erwähnt, häufig über interne Automobilnetzwerke Zugriff auf andere wichtige Automotive-ECUs ermöglicht. \cite[4\psq]{Checkoway.2011}
+
+\subsubsection{Adressierbare Kanäle}
+Über adressierbare Kanäle lassen sich individuelle Fahrzeuge direkt ansteuern. Die Verbindung erfolgt in der Regel über das Mobilfunknetz.\\
+Durch diese Kanäle können viele Funktionen bereitgestellt werden. Dazu gehören die Unterstützung von Sicherheit (Unfallberichterstattung), Diagnose (frühzeitige Warnung bei mechanischen Problemen), Diebstahlschutz (Fernverfolgung und Deaktivierung) und Komfort (Zugriff auf Daten wie Fahrtrichtungen oder Wetterinformationen). \cite[5]{Checkoway.2011} \\
+Da diese Kanäle meist eine hohe Bandbreite bieten, über große Distanzen und in beide Richtungen funktionieren und das direkte Ansteuern von individuellen Fahrzeugen ermöglichen, sind diese Schnittstellen für potenzielle Angreifer besonders interessant \cite[5]{Checkoway.2011}.
+
 
 \section{Cyber Security}
+\subsection{Security versus Safety}
+Der deutsche Begriff \glqq Sicherheit\grqq{} ist mehrdeutig, was ihn für eine genaue, technische Definition ungeeignet macht. In der IT-Sicherheit wird zwischen den beiden englischen Begriffen \glqq Safety\grqq{} und \glqq Security\grqq{} unterschieden.
+\subparagraph{Safety}
+\glqq Der Begriff Safety bezeichnet die funktionale Sicherheit, bzw. die Betriebssicherheit eines Systems. Ein System darf seine Umgebung etwa durch undefiniertes, unzulässiges Verhalten oder Zustände nicht gefährden. Safety schützt somit Mensch und Umwelt vor negativen Einflüssen des Systems, etwa durch Fehlverhalten und Ausfälle.\grqq{} \cite[2]{Wurm.2022}
+\subparagraph{Security}
+\glqq Der Begriff Security bezeichnet die Informations- und Datensicherheit bzw. die Angriffssicherheit eines Systems. Security umfasst alle Eigenschaften und Maßnahmen, die das System vor absichtlichen und unabsichtlichen Bedrohungen
+von außen schützen. Security schützt somit das System vor negativen Einflüssen von Mensch und Umwelt, wie etwa Bedrohungen und Angriffe. Während sich die sog. klassische IT-Security auf die Absicherung der informationstechnischen Systeme eines Unternehmens wie etwa Computer, Server, Netzwerke und Internetanbindungen konzentriert, zielt die Cybersecurity im Kontext des Automotive Bereichs auf die Absicherung deren Produkte ab.\grqq{} \cite[2\psq]{Wurm.2022}\\
+
+Safety bezieht sich somit mehr auf die Sicherheit des Nutzers während sich die Security eines Systems mehr auf die Daten und das System an sich fokussiert.
+
 \subsection{Security Lifecycle}
 \cite{Wurm.2022}
 \subsection{ISMS}
@@ -166,6 +210,9 @@ Um Features wie eine Freisprecheinrichtung oder das Hören eigener Musik vom Sma
 \chapter{Angriffsflächen}
 \subsection{Bootvorgang}
 \cite{Wurm.2022}
+
+\subsection{Remote Keyless Entry}
+\cite{Garcia.2016}
 
 
 \chapter{Schutzmaßnahmen}
