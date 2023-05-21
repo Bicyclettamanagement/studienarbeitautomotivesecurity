@@ -134,7 +134,7 @@ Die Präambel und der Start Frame Delimiter spielen eine Rolle bei der Taktsynch
 
 
 
-\section{Schnittstellen}
+\section{Schnittstellen}\label{Schnittstellen}
 Moderne Autos verfügen über eine Vielzahl von Schnittstellen, um eine Verbindung mit dem Fahrzeug herzustellen, sei es, um ein Multimediagerät zu verbinden oder zu Diagnosezwecken. Diese Schnittstellen können aber auch eventuell einem potentiellen Angreifer den Zugriff auf das Fahrzeugnetzwerk ermöglichen. Diese möglichen Angriffsvektoren können nach Checkoway et al \cite[1]{Checkoway.2011} in drei Kategorien eingeteilt werden. Diese drei Kategorien sind \glqq indirect physical access\grqq , \glqq short-range physical access\grqq{} und \glqq long-range physical access\grqq . Es folgt eine Beschreibung der Kategorien mit einer Übersicht der typischsten Schnittstellen eines modernen Autos.
 
 \subsection{Indirect Physical Access}
@@ -291,26 +291,65 @@ Die Kryptographie spielt im Zusammenhang mit der Sicherheit von Kraftfahrzeugen 
 %evt Bedrohungsmodell -> Wurm kapitel 1
 
 
+
+
+
 \chapter{Angriffsflächen}
-Nun da die wichtigsten theoretischen Grundlagen erläutert wurden, 
-
-
+Nun da die wichtigsten theoretischen Grundlagen zu Automotive Netzwerken und Cyber Security behandelt wurden, gilt es, die beiden Themenbereiche zusammenzuführen. Hierzu sollen zunächst verschiedene Angriffsflächen von Automobilen untersucht werden. Interessant ist hierbei vor allem, über welche Wege Angreifer sich Zugang zum Fahrzeugnetzwerk verschaffen, wie sie dort ihren Einfluss ausweiten können und wie groß das Risiko für ein Eintreffen des jeweiligen Angriffs ist. 
 
 %\cite[27]{Wurm.2022}
 %evt Kapitel 5
+%\section{Vorgehen bei der Risikoeinschätzung}
 
-\section{Vorgehensweise}
-\cite[35]{Wurm.2022}
 
-\section{Bootvorgang}
+\section{Vernetzte Fahrzeuge aus verschiedenen Perspektiven}
+Die zunehmende Vernetzung und Automatisierung im Automobilbereich bedeuten aus Benutzersicht, also aus Sicht der Fahrer und Mitfahrer, vor allem mehr Komfort und ein angenehmeres Fahrerlebnis. Diese Entwicklung ermöglicht viele Features wie Einparkhilfen, Hilfe bei der Parkplatzsuche, Spurhalteassistenten und Frühwarnsysteme vor Staus, Unfällen oder ähnlichem. Solche Features nehmen dem Fahrer Aufgaben ab oder bieten Unterstützung. \\
+Aus Hersteller-, Flottenbetreiber oder Verkäufersicht ergeben sich aus der Entwicklung vernetzter und automatisierter Fahrzeuge neue Geschäftsmodelle wie zum Beispiel Car-Sharing, aber auch neue Überwachungs- und Fernkonfigurationsmöglichkeiten der eigenen Fahrzeuge. \\
+Aus Angreiferperspektive führt diese Entwicklung hin zu mehr Vernetzung und automatisierung zum Bau von Autos, die von überall aus über das Internet und andere Schnittstellen erreichbar sind, die immer mehr fernsteuerbare Funktionen bieten und die immer mehr ausspähbare Daten über ihre Benutzer erfassen. Das macht moderne Autos zu attraktiven Angriffszielen für mehrere Angreiferarten. Ein Beispiel wären einfache Hobby-Hacker, die gerne ihr Können unter Beweis stellen wollen. Ein weiteres Beispiel sind sogenannte Hacktivisten, die sich unter Umständen gegen den Trend zu mehr Vernetzung und Automatisierung einsetzen wollen. Aber natürlich kann dieses Angriffsziel auch attraktiv auf Hacker mit schlechten Absichten, die ernsthaften Schaden anrichten wollen, wirken.
+
+
+\section{Charakteristische Vorgehensweise}
+Die Art Angriff mit den wahrscheinlich verheerendsten Auswirkungen ist die Kontrollübernahme des Fahrzeugs aus der Ferne. Innerhalb der letzten zehn Jahre haben Whitehat-Hacker mehrfach unter Beweis gestellt, dass eine Fernsteuerung diverser Automobilmodelle über eine Funkverbindung nicht nur theoretisch, sondern auch praktisch möglich ist \cite[35]{Wurm.2022}. Neben dem Jeep Cherokee Angriff von Charlie Miller und Chris Valasek gab es beispielsweise auch erfolgreiche Kompromittierungen von Wagen der Marken BMW und Tesla.\\
+In diesen Hackerangriffen zur Fernsteuerung der Zielfahrzeuge sind Gemeinsamkeiten in der Vorgehensweise erkennbar, aus denen sich ein Angriffsmuster ableiten lässt.\\
+Der erste Schritt ist der Aufbau einer Verbindung zum Infotainment-System. Dieses ist nicht die einzige angreifbare \acs{ECU}, aber ein sehr praktisches Angriffsziel, da es viele Schnittstellen bietet und oft mit dem \acs{CAN}-Bus verbunden ist.\\
+Im zweiten Schritt gilt es, die Kontrolle über das Infotainment-System zu erlangen. Dies gelang den Hackern durch das Ausnutzen verschiedener Schwachstellen.\\
+Nachdem die Kontrolle übernommen wurde ist der nächste Schritt der Zugriff auf den \acs{CAN}-Bus über das \acs{CAN}-Gateway. Im Fall des Jeep Cherokee konnte zum Beispiel der Code der Einheit reverse-engineert und umprogrammiert werden.\\
+Sobald über das Gateway auf den \acs{CAN}-Bus zugegriffen werden kann, lassen sich von dort aus beliebige \acs{CAN}-Pakete versenden. Das können normale und diagnostische Pakete sein. Ist dieser Punkt erreicht, so hat der Hacker sehr viel Macht über das Fahrzeug und kann verheerenden Schaden anrichten.\\
+Schließlich muss dazu allerdings gesagt werden, dass bei sämtlichen dieser Hackerangriffe die Beteiligung zahlreicher Experten und Monate- oder sogar Jahre-lange Vorbereitung für den eigentlichen Angriff notwendig waren. Das Risiko für einen solchen Angriff durch einen gewöhnlichen Hobby-Hacker ist also somit zwar vorhanden, aber nicht sehr wahrscheinlich.
+
+
+\section{Zugriff}
+In diesem Abschnitt erfolgt zunächst eine Untersuchung der teilweise bereits in Kapitel \ref{Schnittstellen} vorgestellten Schnittstellen, über die ein Angreifer sich Zugriff auf das Fahrzeug verschaffen kann. Zudem soll eingeschätzt werden, wie groß das Risiko eines Angriffs über die jeweilige Schnittstelle ist.
+%\cite[10]{Miller.2015}
+
+
+\subsection{Media Player}
+Checkoway et al entdeckten Schwachstellen im Media Player eines Autos. So fanden sie heraus, dass der CD-Spieler bei einer speziell formatierten CD nach Anzeigen einer kryptischen Meldung die ganze Einheit mit dem Inhalt der CD neu flasht. Dies bietet die Möglichkeit, eigenen Code in das System einzuschleusen. Des Weiteren stellte sich der Parser für die Audio Dateien als anfällig für einen Buffer-Overflow Angriff heraus. Dem Forscherteam gelang es, eine CD zu erstellen, die die genannten Schwachstellen ausnutzt und beim Abspielen im Media Player \acs{CAN}-Pakete versendet. \cite[7]{Checkoway.2011} \\
+Für diese Art von Angriff ist ein Reverse-Engineering der Firmware der Einheit notwendig. Das bedeutet einen großen Aufwand, den jedoch ein ambitionierter Hacker eventuell auf sich nehmen könnte. Erschwerend kommt aber hinzu, dass die entdeckte Schwachstelle nicht bei jedem Media Player funktioniert. Außerdem muss das Opfer des Angriffs zunächst überzeugt werden, die CD abzuspielen. Das Ausmaß des Angriffs ist zwar gefährlich, aber nicht ganz so schlimm wie bei einer Fernsteuerung, da keine Live-Verbindung zum Fahrzeug besteht. Insgesamt ist dieses Risiko daher mittelschwer.
+
+\subsection{OBD-II Port}
+Der OBD-II Port bietet direkten Zugriff auf den \acs{CAN}-Bus eines Fahrzeugs. Daher ist das Senden von Paketen über diese Schnittstelle mit weniger Hindernissen verbunden, als wenn zuerst noch eine \acs{ECU} gehackt werden muss. Der Port ist jedoch nur durch direkten physischen Zugriff erreichbar und befindet sich meist im Fußraum des Fahrers. Die Wahrscheinlichkeit, dass sich jemand hier während der Fahrt unbemerkt Zugriff verschafft und die Kontrolle über das Fahrzeug übernimmt, ist sehr gering. Es gibt jedoch noch andere Angriffsarten. Beispielsweise kann der Diagnoselaptop und damit das Diagnosetool einer Werkstatt oder eines Herstellers über das Internet kompromittiert werden. Somit könnte ein Angreifer indirekt aus der Distanz auf den Port zugreifen. Außerdem kann es auch sein, dass sich der Fahrzeugbesitzer selbst unbefugten Zugriff über den Port verschaffen will, zum Beispiel um den Kilometerstand des Fahrzeugs zu ändern und damit den Wert zu steigern. Insgesamt ist die Schwere dieses Risikos bei Betrachtung von Eintrittswahrscheinlichkeit und Schadensausmaß an der Grenze zwischen gering und mittel einzustufen.
+
+\subsection{Bootvorgang}
 \cite[82]{Wurm.2022}
+
+\subsection{Passive Anti-Theft System}
+Viele moderne Autos haben einen kleinen Chip im Zündschlüssel, der mit den Sensoren des Fahrzeugs kommuniziert. In manchen Fällen ist dieser Sensor direkt mit dem Radio Frequency Hub Module (RFHM) verbunden. Wenn der Zündknopf gedrückt wird, sendet der Fahrzeugcomputer ein RF-Signal, das vom Transponder im Schlüssel empfangen wird. Der Transponder sendet daraufhin ein eindeutiges RF-Signal an den Fahrzeugcomputer zurück und bestätigt damit den Start und die Weiterfahrt. Wenn der Computer nicht den korrekten Identifizierungscode empfängt, bleiben bestimmte Komponenten wie der Anlasser deaktiviert.
+Wenn man mögliche Angriffe aus der Ferne betrachtet, ist die Verwundbarkeit dieses Systems minimal. Die einzigen Daten, die von der Software auf dem integrierten Schaltkreis (IC) übertragen und verarbeitet werden, sind der Identifizierungscode und das zugrunde liegende RF-Signal. Es ist schwierig, sich ausnutzbare Schwachstellen in diesem Code vorzustellen. Selbst wenn es welche gäbe, müsste sich ein Angreifer in unmittelbarer Nähe des Sensors aufhalten, da dieser absichtlich so konzipiert ist, dass er nur Signale in der Nähe erkennt.\cite[13]{Miller.2015} \\
+Das Risiko eines Angriffs über diese Schnittstelle ist somit zwar theoretisch vorhanden, aber verschwindend gering.
+
 
 \subsection{Remote Keyless Entry}
 \cite{Garcia.2016}
 
+\section{Auswirkung}
+\cite[10]{Miller.2015}
+
+
 
 \chapter{Schutzmaßnahmen}
 \cite[42]{Wurm.2022} und generell Kapitel 2 + 4 + 5
+\cite{MillerCharlie.2019}
 
 % Nilsson, D. K. & Larson, U. E. (2009). A defence-in-depth approach to securing the wireless vehicle infrastructure. Journal of Networks, 4(7). https://doi.org/10.4304/jnw.4.7.552-564
 %
