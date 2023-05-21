@@ -22,7 +22,7 @@ In Automotive Netzwerken lassen sich zwei Arten von \acs{CAN}-Paketen finden: no
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{Miller_canbus-ford2010}
+\includegraphics[width=0.7\textwidth]{Miller_canbus-ford2010}
 \label{fig:canbus-ford2010}
 \caption{Beispiel des \acs{CAN}-Netzwerks eines 2010 Ford Escape}
 \quelle{\cite[19]{Miller.2013}}
@@ -53,7 +53,7 @@ Diagnostische Pakete tauchen während des normalen Betriebs des Autos im Normalf
 \subsection{Local Interconnect Network}
 Ein weiteres relevantes Protokoll im Automotive Bereich ist das \ac{LIN} Protokoll. Es wurde 1998 in Zusammenarbeit von Audi, BMW, DaimlerChrysler, Volvo, Volkswagen, VCT und Motorola entwickelt mit dem Ziel, ein möglichst kosteneffizientes Kommunikationsprotokoll zu schaffen \cite[57]{Fijalkowski.2011}.
 Das \acs{LIN}-Protokoll basiert auf dem Serial Connections Interface Datenformat und ist in einer Single Master/Multiple Slaves Architektur aufgebaut. Das bedeutet, dass eine elektronische Kontrolleinheit als Masterknoten fungiert und andere elektronische Slave-Einheiten miteinander verbindet.
-%Genauere Funktionsweise / Paketaufbau ergänzen
+
 
 \subsubsection{Aufbau}
 Nachrichtenpakete bestehen im \acs{LIN}-Standard aus einem Header und einem Data Frame. Der Header enthält einen Synchronisation Break, ein Synchronisation Byte und einen Message Identifier. Die ersten beiden Bestandteile sind für die Nachrichtensynchronisierung notwendig. Der Identifier wird benötigt, damit Knoten erkennen können, ob eine Nachricht für sie bestimmt ist. Der Data Frame ist nach dem 8N1-Schema aufgebaut. Das bedeutet, dass jedes Paket ein Startbit, acht Datenbits, kein Paritätsbit und ein Stopbit besitzt. \cite[58]{Fijalkowski.2011} \\
@@ -197,7 +197,7 @@ Da diese Kanäle meist eine hohe Bandbreite bieten, über große Distanzen und i
 
 \section{Cyber Security}
 Als nächstes werden die Grundlagen der Cyber Security und IT Sicherheit erläutert, die im Bereich der Automotive Security relevant sind. Die IT Security befasst sich eher mit der Sicherheit von elektronisch gespeicherten Daten während die Cyber Security diese Sicherheit auf ganze Systeme, Netzwerke und Kommunikation ausweitet.
-Die Begriffe Cyber- und IT Security sind jedoch eng miteinander verwandt und werden oft als Synonym verwendet. 
+Die Begriffe Cyber- und IT Security sind jedoch eng miteinander verwandt und werden oft als Synonym verwendet.
 
 \subsection{Security und Safety}
 Der deutsche Begriff \glqq Sicherheit\grqq{} ist mehrdeutig, was ihn für eine genaue, technische Definition ungeeignet macht. In der IT-Sicherheit wird zwischen den beiden englischen Begriffen \glqq Safety\grqq{} und \glqq Security\grqq{} unterschieden.
@@ -211,7 +211,15 @@ Safety bezieht sich somit mehr auf die Sicherheit des Nutzers während sich die 
 
 %evt Authentisierung, Authentifizierung, Autorisierung
 \subsection{Sicherheitsziele}\label{Sicherheitsziele}
-Die Sicherheitsziele beschreiben Eigenschaften von Informationen und anderen schützenswerten Ressourcen, die gewünscht sind, um Sicherheit zu gewährleisten. Security-Maßnahmen sollten darauf ausgelegt sein, diese Ziele zu erreichen. Faktoren, die das Erreichen der Sicherheitsziele gefährden, können als Bedrohung identifiziert werden. Die klassischen Sicherheitsziele in der IT Security sind Vertraulichkeit, Integrität und Verfügbarkeit. Im Automotive Bereich werden allerdings oft zusätzlich die Ziele Authentizität, Zurechenbarkeit und Schutz der Privatsphäre genannt \cite[6]{Wurm.2022}.
+Die Sicherheitsziele beschreiben Eigenschaften von Informationen und anderen schützenswerten Ressourcen, die gewünscht sind, um Sicherheit zu gewährleisten. Security-Maßnahmen sollten darauf ausgelegt sein, diese Ziele zu erreichen. Faktoren, die das Erreichen der Sicherheitsziele gefährden, können als Bedrohung identifiziert werden. Die klassischen Sicherheitsziele in der IT Security sind Vertraulichkeit, Integrität und Verfügbarkeit (siehe Abbildung \ref{fig:Sicherheitsziele}). Diese Ziele werden manchmal auch als CIA-Ziele bezeichnet. CIA entspricht hierbei der Abkürzung der englischen Begriffe Confidentiality, Integrity und Availability. Im Automotive Bereich werden allerdings oft zusätzlich die Ziele Authentizität, Zurechenbarkeit und Schutz der Privatsphäre genannt \cite[6]{Wurm.2022}. \\
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{Sicherheitsziele}
+\label{fig:Sicherheitsziele}
+\caption{Die drei klassischen Sicherheitsziele der IT Security}
+\quelle{\cite{Pukies.2020}}
+\end{figure}
 
 \subsubsection{Vertraulichkeit}
 \glqq  Vertraulichkeit beschreibt die Eigenschaft, dass ausschließlich berechtigte Personen bzw. Entitäten auf die zu schützenden Informationen zugreifen können.
@@ -250,36 +258,68 @@ Bedrohungen können absichtliche oder unabsichtliche Ereignisse sein, die die Sc
 Angreifer nutzen vorhandene Schwachstellen aus, um Angriffe durchzuführen und die Assets eines Systems zu bedrohen. Passive Angriffe zielen hierbei auf die Informationsbeschaffung ab, während aktive Angriffe darauf abzielen, die Integrität, Authentizität und Verfügbarkeit des Systems zu beeinträchtigen. \\
 Risiken werden im Rahmen einer Risikoanalyse bewertet und sind definiert durch Eintrittswahrscheinlichkeit und potenzielles Schadensausmaß. Schwachstellen erhöhen das Risiko, während Gegenmaßnahmen und Schutzkonzepte das Risiko reduzieren. Gegenmaßnahmen, auch als Sicherheitskontrollen bezeichnet, sollen potenzielle Bedrohungen verhindern und die Wahrscheinlichkeit von Angriffen auf ein akzeptables Niveau reduzieren. Angreifer können aus verschiedenen Personengruppen stammen, von Hobby-Hackern bis hin zu staatlichen Organisationen wie Geheimdiensten. Es ist jedoch auch möglich, dass Angriffe von aktuellen Fahrzeugbesitzern selbst durchgeführt werden, beispielsweise durch das Manipulieren des Kilometerstandes zur Erhöhung des Wiederverkaufswerts eines Fahrzeugs. \cite[5\psq]{Wurm.2022}
 
+\subsubsection{Risikomatrix}
+Ein sehr verbreitetes Werkzeug der Risikoanalyse ist die Risikomatrix (siehe Abbildung \ref{fig:Risikomatrix}). Sie dient der Einschätzung und Berechnung von Risiken. Mithilfe einer Risikomatrix kann die Bedeutung und das Ausmaß eines Risikos einfach bestimmt und anschaulich visualisiert werden. In der Regel hat eine Risikomatrix die zwei Dimensionen Eintrittswahrscheinlichkeit und Schadensausmaß. Diese verfügen meist über eine vorher zu definierende, künstliche, ordinale Skalierung. Die Risiken werden dann auf einer Skala von niedrig bis hoch in Bezug auf ihre Wahrscheinlichkeit und Auswirkung eingestuft. Die Wahrscheinlichkeit kann beispielsweise in Kategorien wie selten, gelegentlich, häufig oder sehr häufig unterteilt werden, während die Auswirkung auf Kategorien wie gering, moderat, hoch oder katastrophal abgestuft werden kann. Die einzelnen Felder der Matrix sind meist in verschiedenen Farben eingefärbt. Die genaue Farbverteilung der Felder innerhalb der Matrix ist individuell und kann sich je nach Anwendungsfall unterscheiden. In der Regel sind geringe Risiken grün, mittlere Risiken gelb und große Risiken rot eingefärbt. Wo genau die Grenze gezogen wird ist jedoch dem Ersteller überlassen.
+Die Risikobewertung erfolgt durch das Zuweisen eines Wertes oder einer Farbe zu jedem Risiko, abhängig von seiner Position in der Risikomatrix. Für die Berechnung eines Wertes wird meist der Wert der Eintrittswahrscheinlichkeit mit dem Wert des Schadensausmaßes multipliziert. Abhängig von der Klassifikation eines Risikos kann anschließend entschieden werden, wie es zu behandeln ist.
+\\
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{Risikomatrix}
+\label{fig:Risikomatrix}
+\caption{Beispiel für eine Risikomatrix}
+\quelle{\cite{Peterjohann.2014}}
+\end{figure}
+
+%\subsection{ISMS}
+%\cite[62]{Wurm.2022} (Kapitel 3)
 
 \subsection{Kryptographie}
+\glqq Der Begriff Kryptographie stammt vom griechischen kryptos (verborgen) und graphein (schreiben) ab und bezeichnet die Wissenschaft der Geheimschriften oder der Verschlüsselung von Informationen.
+\grqq{} \cite[9]{Wurm.2022}\\
+Die Kryptographie beschäftigt sich also hauptsächlich damit, Informationen in anderer Form darzustellen. Dies kann Zwecken der Geheimhaltung, Datenübertragung oder Komprimierung dienen. Außerdem können kryptographische Verfahren wie zum Beispiel RSA auch zur Authentifizierung durch Signaturen eingesetzt werden.\\
+Kryptographie im Zusammenhang mit der Sicherheit von Kraftfahrzeugen bezieht sich auf den Einsatz von Ver- und Entschlüsselungstechniken zur Gewährleistung der Vertraulichkeit, Integrität und Authentizität von Daten und Kommunikationssystemen in Fahrzeugen. Durch den Einsatz kryptografischer Techniken werden Informationen vor unbefugtem Zugriff und Manipulationen geschützt, um die Sicherheit und Privatsphäre der Fahrzeuginsassen zu gewährleisten. \\
+Hierbei gilt wie in der allgemeinen IT Security das Auguste Kerkhoff Prinzip. Dieses besagt, dass in einem guten Kryptographiesystem lediglich der Schlüssel geheim gehalten werden muss. Das System muss auch dann Sicherheit bieten, wenn seine genaue Funktionsweise bekannt ist. Das Prinzip \glqq Security by Obscurity\grqq , also Sicherheit durch Verschleierung der Funktionsweise des Kryptographiesystems, sollte nicht zum Einsatz kommen. Daher beruhen viele Kryptographieverfahren auf sehr schwer berechenbaren, mathematischen Problemen. Im Fall von RSA wäre das die Faktorisierung sehr großer Zahlen.\\
+Im Automobilbereich umfasst die Kryptographie verschiedene Anwendungsfälle, wie die sichere Übertragung von Daten zwischen Fahrzeugkomponenten, die Verschlüsselung von drahtlosen Kommunikationskanälen (z. B. \acs{V2X}-Kommunikation) und die Absicherung von Fahrzeugfunktionen gegen potenzielle Angriffe.
+Verschiedene kryptografische Verfahren wie symmetrische und asymmetrische Verschlüsselung, digitale Signaturen und Hash-Funktionen werden eingesetzt, um die Vertraulichkeit von Daten zu gewährleisten, die Integrität von Nachrichten zu garantieren und die Authentizität der Kommunikationsteilnehmer zu überprüfen. Außerdem werden sichere Schlüsselverwaltungssysteme und -protokolle verwendet, um den sicheren Austausch von Verschlüsselungs- und Authentifizierungsschlüsseln zu ermöglichen.
+Die Kryptographie spielt im Zusammenhang mit der Sicherheit von Kraftfahrzeugen eine wichtige Rolle, da sie dazu beiträgt, die Risiken von Cyberangriffen auf Fahrzeuge zu verringern und die Sicherheit von Fahrzeugelektronik und Kommunikationssystemen zu erhöhen. Durch den Einsatz kryptografischer Verfahren können vertrauliche Informationen geschützt und die Integrität von Fahrzeugdaten gewährleistet werden, was letztlich zu einer sicheren und zuverlässigen Fahrzeugkommunikation und -funktionalität führt.
+
+%\subsection{Security Lifecycle}
+%\cite{Wurm.2022} vlt Kapitel 4
 
 
-%Kryptografie im Zusammenhang mit der Sicherheit von Kraftfahrzeugen bezieht sich auf den Einsatz von Ver- und Entschlüsselungstechniken zur Gewährleistung der Vertraulichkeit, Integrität und Authentizität von Daten und Kommunikationssystemen in Fahrzeugen. Durch den Einsatz kryptografischer Techniken werden Informationen vor unbefugtem Zugriff und Manipulationen geschützt, um die Sicherheit und Privatsphäre der Fahrzeuginsassen zu gewährleisten.
-%Im Automobilbereich umfasst die Kryptografie verschiedene Anwendungen, wie die sichere Übertragung von Daten zwischen Fahrzeugkomponenten, die Verschlüsselung von drahtlosen Kommunikationskanälen (z. B. V2X-Kommunikation) und die Absicherung von Fahrzeugfunktionen gegen potenzielle Angriffe.
-%Verschiedene kryptografische Verfahren wie symmetrische und asymmetrische Verschlüsselung, digitale Signaturen und Hash-Funktionen werden eingesetzt, um die Vertraulichkeit von Daten zu gewährleisten, die Integrität von Nachrichten zu garantieren und die Authentizität der Kommunikationsteilnehmer zu überprüfen. Außerdem werden sichere Schlüsselverwaltungssysteme und -protokolle verwendet, um den sicheren Austausch von Verschlüsselungs- und Authentifizierungsschlüsseln zu ermöglichen.
-%
-%Die Kryptografie spielt im Zusammenhang mit der Sicherheit von Kraftfahrzeugen eine wichtige Rolle, da sie dazu beiträgt, die Risiken von Cyberangriffen auf Fahrzeuge zu verringern und die Sicherheit von Fahrzeugelektronik und Kommunikationssystemen zu erhöhen. Durch den Einsatz kryptografischer Verfahren können vertrauliche Informationen geschützt und die Integrität von Fahrzeugdaten gewährleistet werden, was letztlich zu einer sicheren und zuverlässigen Fahrzeugkommunikation und -funktionalität führt.
-
-
-
-Übersetzt mit www.DeepL.com/Translator (kostenlose Version)
-\subsection{Security Lifecycle}
-\cite{Wurm.2022}
-\subsection{ISMS}
+%evt Bedrohungsmodell -> Wurm kapitel 1
 
 
 \chapter{Angriffsflächen}
-\section{Vorgehensweise}
-\cite[36]{Wurm.2022}
+Nun da die wichtigsten theoretischen Grundlagen erläutert wurden, 
 
-\subsection{Bootvorgang}
-\cite{Wurm.2022}
+
+
+%\cite[27]{Wurm.2022}
+%evt Kapitel 5
+
+\section{Vorgehensweise}
+\cite[35]{Wurm.2022}
+
+\section{Bootvorgang}
+\cite[82]{Wurm.2022}
 
 \subsection{Remote Keyless Entry}
 \cite{Garcia.2016}
 
 
 \chapter{Schutzmaßnahmen}
+\cite[42]{Wurm.2022} und generell Kapitel 2 + 4 + 5
+
+% Nilsson, D. K. & Larson, U. E. (2009). A defence-in-depth approach to securing the wireless vehicle infrastructure. Journal of Networks, 4(7). https://doi.org/10.4304/jnw.4.7.552-564
+%
+% Highland, H. J. (1995). AIN’T misbehaving—A taxonomy of anti-intrusion techniques. Computers & Security, 14(7), 606. https://doi.org/10.1016/0167-4048(96)81669-5.
+
+
+
+\section{Herausforderungen der Automotive Security}
+\cite[36]{Wurm.2022} + 233 (AM-Devices)
+
 \subsection{SecureBoot}
 \cite{Wurm.2022}[84]
