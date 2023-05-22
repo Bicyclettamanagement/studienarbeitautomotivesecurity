@@ -294,7 +294,7 @@ Die Kryptographie spielt im Zusammenhang mit der Sicherheit von Kraftfahrzeugen 
 
 
 
-\chapter{Angriffsflächen}
+\chapter{Angriffsflächen von Fahrzeugen}
 Nun da die wichtigsten theoretischen Grundlagen zu Automotive Netzwerken und Cyber Security behandelt wurden, gilt es, die beiden Themenbereiche zusammenzuführen. Hierzu sollen zunächst verschiedene Angriffsflächen von Automobilen untersucht werden. Interessant ist hierbei vor allem, über welche Wege Angreifer sich Zugang zum Fahrzeugnetzwerk verschaffen, wie sie dort ihren Einfluss ausweiten können und wie groß das Risiko für ein Eintreffen des jeweiligen Angriffs ist. 
 
 %\cite[27]{Wurm.2022}
@@ -308,7 +308,7 @@ Aus Hersteller-, Flottenbetreiber oder Verkäufersicht ergeben sich aus der Entw
 Aus Angreiferperspektive führt diese Entwicklung hin zu mehr Vernetzung und automatisierung zum Bau von Autos, die von überall aus über das Internet und andere Schnittstellen erreichbar sind, die immer mehr fernsteuerbare Funktionen bieten und die immer mehr ausspähbare Daten über ihre Benutzer erfassen. Das macht moderne Autos zu attraktiven Angriffszielen für mehrere Angreiferarten. Ein Beispiel wären einfache Hobby-Hacker, die gerne ihr Können unter Beweis stellen wollen. Ein weiteres Beispiel sind sogenannte Hacktivisten, die sich unter Umständen gegen den Trend zu mehr Vernetzung und Automatisierung einsetzen wollen. Aber natürlich kann dieses Angriffsziel auch attraktiv auf Hacker mit schlechten Absichten, die ernsthaften Schaden anrichten wollen, wirken.
 
 
-\section{Charakteristische Vorgehensweise}
+\section{Charakteristische Vorgehensweise}\label{Vorgehen}
 Die Art Angriff mit den wahrscheinlich verheerendsten Auswirkungen ist die Kontrollübernahme des Fahrzeugs aus der Ferne. Innerhalb der letzten zehn Jahre haben Whitehat-Hacker mehrfach unter Beweis gestellt, dass eine Fernsteuerung diverser Automobilmodelle über eine Funkverbindung nicht nur theoretisch, sondern auch praktisch möglich ist \cite[35]{Wurm.2022}. Neben dem Jeep Cherokee Angriff von Charlie Miller und Chris Valasek gab es beispielsweise auch erfolgreiche Kompromittierungen von Wagen der Marken BMW und Tesla.\\
 In diesen Hackerangriffen zur Fernsteuerung der Zielfahrzeuge sind Gemeinsamkeiten in der Vorgehensweise erkennbar, aus denen sich ein Angriffsmuster ableiten lässt.\\
 Der erste Schritt ist der Aufbau einer Verbindung zum Infotainment-System. Dieses ist nicht die einzige angreifbare \acs{ECU}, aber ein sehr praktisches Angriffsziel, da es viele Schnittstellen bietet und oft mit dem \acs{CAN}-Bus verbunden ist.\\
@@ -331,34 +331,168 @@ Für diese Art von Angriff ist ein Reverse-Engineering der Firmware der Einheit 
 Der OBD-II Port bietet direkten Zugriff auf den \acs{CAN}-Bus eines Fahrzeugs. Daher ist das Senden von Paketen über diese Schnittstelle mit weniger Hindernissen verbunden, als wenn zuerst noch eine \acs{ECU} gehackt werden muss. Der Port ist jedoch nur durch direkten physischen Zugriff erreichbar und befindet sich meist im Fußraum des Fahrers. Die Wahrscheinlichkeit, dass sich jemand hier während der Fahrt unbemerkt Zugriff verschafft und die Kontrolle über das Fahrzeug übernimmt, ist sehr gering. Es gibt jedoch noch andere Angriffsarten. Beispielsweise kann der Diagnoselaptop und damit das Diagnosetool einer Werkstatt oder eines Herstellers über das Internet kompromittiert werden. Somit könnte ein Angreifer indirekt aus der Distanz auf den Port zugreifen. Außerdem kann es auch sein, dass sich der Fahrzeugbesitzer selbst unbefugten Zugriff über den Port verschaffen will, zum Beispiel um den Kilometerstand des Fahrzeugs zu ändern und damit den Wert zu steigern. Insgesamt ist die Schwere dieses Risikos bei Betrachtung von Eintrittswahrscheinlichkeit und Schadensausmaß an der Grenze zwischen gering und mittel einzustufen.
 
 \subsection{Bootvorgang}
-\cite[82]{Wurm.2022}
+Mit Bootvorgang ist der Startvorgang eines Rechnersystems gemeint. Der Bootprozess ist ein attraktives Ziel für Angreifer, da beim Starten des Systems eventuell viele Sicherheitsmaßnahmen umgangen werden können. Ein Angreifer kann die Funktionsweise des Systems manipulieren, um unautorisierten Zugriff auf sensible Daten zu erhalten oder Fehlfunktionen auszulösen, die die Sicherheit des Fahrzeugs gefährden können. Darüber hinaus können die Manipulationen zu Schäden an Systemkomponenten führen oder sensible Informationen gestohlen werden. Ein Angriff auf den Bootprozess erfordert entweder das Einschleusen von manipuliertem Programmcode oder die Manipulation des vorhandenen Codes. Sogar minimale Veränderungen können hier bereits zu Sicherheitsrisiken führen. Eine weitere Möglichkeit ist das Downgrade der Software, indem aktuelle Versionen durch ältere ersetzt werden, die Schwachstellen aufweisen können. \cite[83]{Wurm.2022} \\
+Um das Risiko eines solchen Angriffs zu minimieren sind Maßnahmen erforderlich.
 
 \subsection{Passive Anti-Theft System}
 Viele moderne Autos haben einen kleinen Chip im Zündschlüssel, der mit den Sensoren des Fahrzeugs kommuniziert. In manchen Fällen ist dieser Sensor direkt mit dem Radio Frequency Hub Module (RFHM) verbunden. Wenn der Zündknopf gedrückt wird, sendet der Fahrzeugcomputer ein RF-Signal, das vom Transponder im Schlüssel empfangen wird. Der Transponder sendet daraufhin ein eindeutiges RF-Signal an den Fahrzeugcomputer zurück und bestätigt damit den Start und die Weiterfahrt. Wenn der Computer nicht den korrekten Identifizierungscode empfängt, bleiben bestimmte Komponenten wie der Anlasser deaktiviert.
 Wenn man mögliche Angriffe aus der Ferne betrachtet, ist die Verwundbarkeit dieses Systems minimal. Die einzigen Daten, die von der Software auf dem integrierten Schaltkreis (IC) übertragen und verarbeitet werden, sind der Identifizierungscode und das zugrunde liegende RF-Signal. Es ist schwierig, sich ausnutzbare Schwachstellen in diesem Code vorzustellen. Selbst wenn es welche gäbe, müsste sich ein Angreifer in unmittelbarer Nähe des Sensors aufhalten, da dieser absichtlich so konzipiert ist, dass er nur Signale in der Nähe erkennt.\cite[13]{Miller.2015} \\
 Das Risiko eines Angriffs über diese Schnittstelle ist somit zwar theoretisch vorhanden, aber verschwindend gering.
 
+\subsection{Reifendruck-Kontrollsystem}
+Im Rahmen des Reifendruck-Kontrollsystems senden die Reifendrucksensoren Pakete an eine Kontrolleinheit. Rouf et al haben allerdings herausgefunden, dass sich diese Pakete auch aus bis zu über 40 Metern Entfernung senden und empfangen lassen \cite[8]{Rouf.2010}. Somit könnten beispielsweise Pakete von einem anderen Auto aus empfangen und reverse-engineert werden. Anschließend wären die Angreifer in der Lage, falsche Pakete zu senden und dem Opfer damit ein Reifendruckproblem vorzugaukeln. \\
+Im Fall von Rouf et al gab es keine Form der Authentisierung oder Input-Validierung und somit konnte das Hackerteam die Reifendruckanzeige ohne Hindernisse nach belieben manipulieren. Darüber hinaus gelang es dem Team sogar, die Kontrolleinheit zum Absturz zu bringen und langfristig unbrauchbar zu machen. \cite[12]{Rouf.2010} \\
+Aufgrund der fehlenden Paketvalidierung hat diese Art von Angriff eine ernst zu nehmende Eintrittswahrscheinlichkeit. Allerdings hält sich das Schadensausmaß in Grenzen, da das Auto theoretisch auch ohne \acs{RDKS} funktionieren kann. Gerade aber in Kombination mit anderen womöglich sogar physischen Angriffen auf das Auto oder die Reifen ist dennoch ein größerer Schaden denkbar. Daher ist das Risiko dieses Angriffs als mittelschwer einzustufen und sollte behandelt werden.
+
+\subsection{Bluetooth}
+Auch die Bluetooth-Schnittstelle bietet Schwachstellen, die als Angriffsfläche genutzt werden können. So führten Checkoway et al 2011 einen erfolgreichen Angriff auf ein Testfahrzeug über Bluetooth durch \cite[9]{Checkoway.2011}. In der Regel wird diese Schnittstelle genutzt, um ein Smartphone mit dem Fahrzeug zu verbinden. In ihrem ersten Anlauf verwendeten die Hacker also ein bereits mit dem Fahrzeug gekoppeltes Smartphone. Auf dieses spielten sie einen Trojaner auf, der bei Verbindung mit einem Auto die Übertragung von Schadcode startet. Auf diese Weise konnte das Team die Kontrolle über das Infotainment-System übernehmen. \\
+In ihrem zweiten Anlauf wollten die Hacker herausfinden, ob sich das System auch ohne ein bereits gekoppeltes Gerät hacken lässt. Sie fanden heraus, dass auch ohne Interaktion des Benutzers auch ein fremdes Smartphone mit dem Fahrzeug gekoppelt werden kann. Hierfür muss zunächst die Bluetooth-MAC-Adresse des Fahrzeugs herausgefunden werden, um Pairing-Anfragen zu senden. Die MAC-Adresse lässt sich durch ein Sniffen des Bluetooth-Datenverkehrs des Fahrzeugs mit einem gekoppelten Gerät in Erfahrung bringen. Dies kann zum Beispiel geschehen, wenn der Benutzer das Fahrzeug startet und währenddessen sein Smartphone bei sich trägt. Anschließend folgt die Kopplung. \\
+Normalerweise erfolgt das Hinzufügen eines neuen Gerätes über das Benutzerinterface. Das Team um Checkoway fand jedoch heraus, dass das Zielfahrzeug auch ohne ein Zutun des Benutzers auf Kopplungsanfragen reagiert. Somit fehlt zum erfolgreichen Pairing nur noch das gemeinsame Geheimnis. Beim normalen Koppelvorgang wird hierzu auf dem Display des Fahrzeugs ein PIN angezeigt, der auf dem Smartphone eingegeben werden muss. Dieser PIN wird zufällig generiert. Die Hacker waren jedoch in der Lage, diesen PIN mit einer Brute-Force-Attacke herauszufinden. Währenddessen waren innerhalb des Fahrzeugs keine Anzeichen für einen Angriff erkennbar. Ein Nachteil dieser Vorgehensweise ist es, dass das Knacken des PINs per Brute-Force aufgrund der Antwortzeit des Fahrzeugs viele Stunden in Anspruch nehmen kann. Das Fahrzeug muss während dieses gesamten Vorgangs angeschaltet sein. Allerdings merkt Checkoway an, dass mit dieser Methode auch viele Fahrzeuge gleichzeitig angegriffen werden können, beispielsweise in einem Parkhaus oder Stau \cite[9]{Checkoway.2011}. Somit ist die Wahrscheinlichkeit höher, dass einer der PINs in kurzer Zeit geknackt werden kann.
+Nach erfolgreicher Kopplung kann dann wie beim ersten Angriff weiter verfahren werden. 
+Das Risiko für das erste Szenario ist recht hoch. Es muss lediglich ein Smartphone mit einem Trojaner infiziert werden, um bereits großen Schaden anzurichten. Das Risiko des zweiten Szenarios ist einerseits geringer, da der Brute-Force-Angriff sehr viel Zeit erfordert. Andererseits ist dafür keine Benutzerinteraktion erforderlich und der Benutzer bemerkt den Angriff womöglich nicht einmal. Außerdem gibt es aus eigener Erfahrung auch Automodelle, bei denen der PIN für die Bluetooth-Kopplung nicht zufällig generiert wird sondern immer \glqq 0000\grqq{} beträgt. Diese Sicherheitslücke erhöht das Risiko noch einmal drastisch.
+
 
 \subsection{Remote Keyless Entry}
-\cite{Garcia.2016}
+Garcia et al untersuchten im Jahr 2016 die Sicherheit von Remote Keyless Entry Systemen von verschiedenen Fahrzeugmodellen, unter anderem von VW. Sie fanden heraus, dass die Sicherheit vieler dieser Systeme auf wenigen globalen Masterschlüsseln beruht. Ein Angreifer könnte theoretisch durch Rekonstruieren der kryptographischen Algorithmen eine Gruppenfernbedienung klonen. Anschließend müsste er nur ein Signal der Originalfernbedienung abhören um sich unbefugten Zugang zum Fahrzeug zu verschaffen. \cite{Garcia.2016}\\
+Dieses Diebstahlrisiko ist hoch einzuschätzen, da ein Angreifer mit dem notwendigen Know-How den Angriff fast ohne Kooperation des Benutzers durchführen kann. Für einen (Fern-)Steuerungsangriff über diese Schnittstelle allerdings sehr gering, da wie beim Passive Anti-Theft System nur sehr wenige Daten übertragen werden, die kaum Spielraum für zu injizierenden Schadcode bieten.
 
-\section{Auswirkung}
-\cite[10]{Miller.2015}
+\subsection{Radio}
+Das Radio empfängt nicht nur Audiosignale, sondern auch andere Daten. Im Jeep hat das Radio viele solcher externen Eingänge, wie z. B. GPS, AM/FM-Radio und Satellitenradio. In den meisten Fällen werden diese Signale in Audiosignale umgewandelt und enthalten normalerweise keine ausnutzbaren Sicherheitslücken, da sie kein signifikantes Parsing der Daten durchführen. Eine mögliche Ausnahme ist das Radio Data System, das Daten zusammen mit FM-Analogsignalen (oder dem Äquivalent im Satellitenradio) sendet. Benutzer sehen dies typischerweise, wenn das Radio den Namen des Senders oder den Titel des abgespielten Songs ansagt. Hier müssen die Daten analysiert und angezeigt werden, was eine potenzielle Sicherheitslücke darstellen kann. \cite[17]{Miller.2015} \\
+Ein Angriff über diese Schnittstelle könnte sehr breit gestreut durchgeführt werden, da die erforderlichen Radiosignale in einem großen Bereich gesendet werden können. Allerdings ist fraglich, wie groß der Spielraum für das injizieren von Schadcode in diesem Szenario tatsächlich ist. In der Praxis haben sich andere Fernangriffskanäle als wirkungsvoller erwiesen. Daher ist das Risiko moderat.
+
+\subsection{WLAN}
+Manche Fahrzeuge bieten die Möglichkeit, als \ac{WLAN}-Hotspot zu fungieren. Angriffe auf \acs{WLAN}-Hotspots sind auch außerhalb des Automotive-Kontexts bereits ausreichend bekannt. Daher stellt diese Schnittstelle ebenfalls eine ernst zu nehmende  Angriffsfläche für die Übernahme der Kontrolle über das Infotainment-System dar. Beispielsweise gelang es einem Hackerteam, einen erfolgreichen Buffer-Overflow-Angriff auf ein solches System durchzuführen \cite[18]{Miller.2015}.\\
+Ein Angriff auf diese Schnittstelle stellt in Sachen Eintrittswahrscheinlichkeit und Ausmaß ein ähnlich großes Risiko wie ein Angriff über Bluetooth, wenn nicht sogar noch größer.
+
+\subsection{Mobilfunk}
+Die für Hacker wahrscheinlich interessanteste Angriffsfläche ist die Mobilfunk-Schnittstelle moderner Autos. Das liegt daran, dass die Reichweite hier nicht begrenzt ist. Ein Zugriff kann von nahezu überall auf der Welt durchgeführt werden. Die Machbarkeit eines Angriffs über das Mobilfunknetz wurde bereits in mehreren akademischen Hackerangriffen auf Autos eindrucksvoll demonstriert. So gelang es zum Beispiel auch dem Team um Steven Checkoway, sich Kontrolle über das Infotainment-System eines Fahrzeugs über das Mobilfunknetz zu verschaffen. Durch eine Schwachstelle im Gateway der Einheit konnten sie einen Buffer-Overflow-Angriff durchführen. Außerdem gelang es ihnen, durch wiederholtes Anrufen des Fahrzeugs die eigentlich für das Gateway erforderliche Authentifizierung zu umgehen. Sie zeigten außerdem, dass der Angriff komplett blind durchgeführt werden kann. \cite[11]{Checkoway.2011} \\
+Immer wieder werden neue Schwachstellen in dieser Schnittstelle entdeckt, zum Beispiel beim Angriff auf den Jeep Cherokee, aber auch bei Fahrzeugen von BMW oder Tesla \cite[35]{Wurm.2022}. Auch wenn die Angriffe stets von Expertenteams mit monatelanger Vorbereitung durchgeführt wurden, erscheint diese Art Angriff dadurch nicht mehr so unwahrscheinlich. Außerdem ist das potenzielle Schadensausmaß erheblich, da der Angriff von überall aus auf beliebige Fahrzeuge ohne Zutun des Fahrzeugbesitzers durchgeführt werden kann. Diese Schnittstelle bietet also mit Abstand das größte Risiko.
+
+
+
+\section{Auswirkungen}
+Im letzen Abschnitt wurden verschiedene Wege gezeigt, wie ein Angreifer sich Zugriff auf den \acs{CAN}-Bus verschaffen kann. Dass ein solcher Zugriff bei autonom fahrenden Fahrzeugen enorme Möglichkeiten der Fernsteuerung bietet, versteht sich von selbst. Allerdings sind gewöhnliche Autos mit halbwegs moderner Ausstattung ebenfalls gefährdet. In diesem Abschnitt sollen nun sicherheitsrelevante Features gezeigt werden, die dem Angreifer bei erfolgreicher Verbindung zum Controller Area Network Möglichkeiten zur Kontrolle des Fahrzeugs bieten.
+
+%\cite[10]{Miller.2015}
+
+\subsection{Adaptive Cruise Control}
+Das Adaptive Cruise Control (ACC) System soll den Fahrer dabei unterstützen, eine angemessene Distanz zum vorausfahrenden Auto zu halten. Hierfür misst es über Sensoren den Abstand zum Vorderauto und passt dementsprechend durch Beschleunigung oder Bremsen die Geschwindigkeit an. \\
+Ein Angreifer, der Zugriff auf den \acs{CAN}-Bus und das \acs{ACC} System eines Fahrzeugs hat, könnte potenziell das Fahrzeug fernsteuern. Das ACC-System verwendet Informationen wie die Geschwindigkeit des vorausfahrenden Fahrzeugs und Abstandssensoren, um die Geschwindigkeit des eigenen Fahrzeugs anzupassen und einen sicheren Abstand einzuhalten. Durch Manipulation der \acs{CAN}-Bus-Nachrichten, die das \acs{ACC}-System steuern, könnte ein Angreifer falsche Informationen senden, die bewirken, dass das \acs{ACC}-System falsche Berechnungen durchführt und das Fahrzeug unerwartet beschleunigt, abbremst oder den Abstand zum vorausfahrenden Fahrzeug ändert.
+Wenn der Angreifer beispielsweise die Nachrichten des Geschwindigkeitssensors manipuliert und eine falsche Geschwindigkeit an das \acs{ACC}-System sendet, könnte das System glauben, dass das Fahrzeug mit einer anderen Geschwindigkeit fährt als tatsächlich der Fall ist. Dadurch könnte es zu gefährlichen Situationen kommen, da das \acs{ACC}-System falsche Entscheidungen treffen würde, um den Abstand zum vorausfahrenden Fahrzeug zu kontrollieren.\\
+Diese Kontrollmöglichkeiten reichen bereits aus, damit der Angreifer einen schwerwiegenden Unfall verursachen kann.
+
+\subsection{Forward Collision Warning Plus}
+Forward Collision Warning Plus ist ein System, das Frontalzusammenstöße verhindern soll. Es funktioniert ähnlich wie \acs{ACC} mit dem Unterschied, dass es standardmäßig immer aktiviert ist. Es ermöglicht einem Angreifer mit Zugriff auf den \acs{CAN}-Bus somit, jederzeit die Bremsen zu aktivieren und gegebenenfalls eine Vollbremsung durchzuführen.
+
+\subsection{Spurhalteassistent}
+Der Spurhalteassistent erkennt über Sensoren die Fahrbahnlinien am Straßenrand. Er ist in der Lage, kleine Lenkbewegungen zur Korrektur der Fahrtrichtung durchzuführen, damit die Fahrspur nicht verlassen wird.\\
+Ein Angreifer, der Zugriff auf den \acs{CAN}-Bus und den Spurhalteassistenten eines Fahrzeugs hat, kann das Fahrzeug nicht direkt fernsteuern. Der Spurhalteassistent ist dafür konzipiert, dem Fahrer bei der Fahrbahnpositionierung zu unterstützen und das Fahrzeug innerhalb der Fahrspur zu halten. Es überwacht in der Regel die Fahrbahnmarkierungen und gibt bei Bedarf Lenkimpulse, um das Fahrzeug zurück in die Spur zu bringen.
+Jedoch könnte ein Angreifer den Spurhalteassistenten manipulieren, um potenziell gefährliche Situationen zu erzeugen oder den Fahrer zu verwirren. Durch Manipulation der \acs{CAN}-Bus-Nachrichten, die den Spurhalteassistenten steuern, könnte ein Angreifer falsche Informationen senden, um das System zu täuschen.
+Beispielsweise könnte der Angreifer falsche Fahrbahnmarkierungen oder Hindernisse simulieren, die vom Spurhalteassistenten erkannt werden. Dadurch könnte das System fälschlicherweise Gegenlenkungen oder andere Maßnahmen ergreifen, um das Fahrzeug aus der Spur zu bringen oder unerwartete Lenkmanöver durchzuführen.
+Es ist jedoch wichtig anzumerken, dass solche Angriffe auf den Spurhalteassistenten und den \acs{CAN}-Bus sehr herausfordernd sind und spezifische Kenntnisse über das Fahrzeugsystem erfordern. Dennoch ist theoretisch eine Kontrolle der Lenkung über den Spurhalteassistenten möglich.
+
+\subsection{Einparkhilfe}
+Moderne Einparkhilfen nehmen dem Fahrer den gesamten Einparkvorgang ab. Über Sensoren werden die Dimensionen und Position einer Parklücke erkannt und nach Bestätigung des Fahrers lenkt, beschleunigt und bremst das Fahrzeug selbstständig, um sich in die Parklücke zu manövrieren.\\
+Wie auch schon beim Spurhalteassistenten kann ein Angreifer auch hier nicht so einfach die Funktionalitäten der Einparkhilfe nutzen, um das Fahrzeug per \acs{CAN}-Nachrichten zu fernsteuern. Jedoch ist es auch hier möglich, falsche Hindernisse zu simulieren, um ein Drehen des Lenkrads auszulösen. Die Machbarkeit dieses Vorgehens haben Charlie Miller und Chris Valasek bei ihrem Angriff auf den Jeep Cherokee nachgewiesen. Ihnen gelang es, die echte Einparkhilfe zu deaktivieren und über falsche \acs{CAN}-Nachrichten das Lenkrad zu drehen und den Jeep von der Fahrbahn zu lenken \cite{Miller.2015}.
+
+\subsection{Diagnostische CAN-Pakete}
+Durch das Senden von diagnostischen \acs{CAN}-Paketen kann auch ein erheblicher Einfluss auf das Fahrverhalten des Fahrzeugs genommen werden. So ist es zum Beispiel möglich den Motor abzuschalten. Außerdem können die Bremsen und auch das Lenkrad deaktiviert werden, so dass sie nicht mehr auf Benutzereingaben reagieren. \\
+Glücklicherweise ignorieren die meisten \acsp{ECU} diagnostische Pakete während das Fahrzeug mit hoher Geschwindigkeit fährt. Angriffe mit diagnostischen Paketen können somit nur bei sehr langsamen Geschwindigkeiten oder im Stillstand durchgeführt werden.
+
+\subsection{Kleinere Angriffe}
+Natürlich ermöglicht der Zugriff auf den \acs{CAN}-Bus auch viele vergleichsweise kleinere Angriffe wie zum Beispiel die Steuerung des Blinkers, der Fahrzeugverriegelung und des Tachometers \cite[84]{Miller.2015}. Damit lässt sich ebenfalls ein gewisses Chaos im Straßenverkehr auslösen, verglichen mit den anderen in diesem Kapitel vorgestellten Features wirken diese Angriffe jedoch mehr wie Spielereien.
+
+
+\section{Zusammenfassung}
+Autos bieten eine große Auswahl an potenziell unsicheren Schnittstellen. Die gefährlichste davon ist die Mobilfunk-Schnittstelle, da auf sie aus beliebiger Entfernung blind zugegriffen werden kann. Viele dieser Schnittstellen können einem Angreifer bei erfolgreicher Übernahme Zugriff auf den \acs{CAN}-Bus verschaffen. Das kann verheerende Folgen haben, da es dem Angreifer ermöglicht, aktiv in das Fahrverhalten des Fahrzeugs einzugreifen. Deshalb ist es dringend erforderlich, die Fahrzeuge gegen solche Angriffe angemessen zu schützen.
+
 
 
 
 \chapter{Schutzmaßnahmen}
-\cite[42]{Wurm.2022} und generell Kapitel 2 + 4 + 5
-\cite{MillerCharlie.2019}
+%\cite[42]{Wurm.2022} und generell Kapitel 2 + 4 + 5
+%\cite{MillerCharlie.2019}
 
 % Nilsson, D. K. & Larson, U. E. (2009). A defence-in-depth approach to securing the wireless vehicle infrastructure. Journal of Networks, 4(7). https://doi.org/10.4304/jnw.4.7.552-564
-%
-% Highland, H. J. (1995). AIN’T misbehaving—A taxonomy of anti-intrusion techniques. Computers & Security, 14(7), 606. https://doi.org/10.1016/0167-4048(96)81669-5.
+
+Im vorherigen Kapitel wurde unter anderem aufgezeigt, dass Cyberangriffe auf Autos meist in mehreren Stufen erfolgen (vergleiche Abschnitt \ref{Vorgehen}). Auf dem Weg zur Kontrolle über das Fahrzeug muss eine Hürde nach der anderen überwunden werden. Erst muss eine Verbindung auf eine \acs{ECU} hergestellt werden, anschließend muss dort Schadcode injiziert werden, um Kontrolle über die Einheit zu erlangen. Danach muss über ein Gateway auf den \acs{CAN}-Bus zugegriffen werden, um eigene Pakete zu senden. Schließlich müssen die entsprechenden \acsp{ECU} noch auf die falschen Pakete reagieren.
+Um diesen Weg für den Angreifer so schwer wie möglich zu gestalten ergibt es Sinn, nicht nur einen dieser Schritte zu erschweren, sondern ein vielschichtiges Sicherheitskonzept zu entwerfen, das dem Angreifer auf jedem einzelnen seiner Schritte Steine in den Weg legt. Es soll im Bestfall nahezu unmöglich sein, sämtliche Verteidigungsschichten zu überwinden.
+
+\section{Defense-In-Depth}
+Ein solches vielschichtiges Sicherheitskonzept ist das Defense-in-Depth-Modell. Eine sinnvolle Anwendung dieses Modells in der Automotive Security wurde in einer Forschungsarbeit von Nilsson und Larson untersucht \cite{Nilsson.2009}. 
+Das Defense-In-Depth-Prinzip bezieht sich auf eine umfassende Sicherheitsstrategie, die auf mehreren Ebenen Schutzmaßnahmen implementiert, um potenzielle Bedrohungen abzuwehren. Es basiert auf der Erkenntnis, dass keine einzelne Sicherheitsmaßnahme ausreicht, um alle möglichen Angriffe zu verhindern oder zu stoppen. Stattdessen wird eine Kombination verschiedener Maßnahmen eingesetzt, die sich gegenseitig ergänzen und einen mehrschichtigen Schutz bieten.
+Das Defense-In-Depth-Prinzip zielt darauf ab, potenzielle Angreifer durch mehrere Hindernisse und Sicherheitskontrollen abzuschrecken und zu erschweren. Jede Sicherheitsebene stellt eine zusätzliche Verteidigungslinie dar, die das Risiko eines erfolgreichen Angriffs verringert. Wenn ein Angreifer eine Sicherheitsmaßnahme überwindet, gibt es immer noch weitere Sicherheitsmaßnahmen, die den Angriff stoppen oder zumindest eindämmen können.
+Im Rahmen ihrer Arbeit beschreiben die Autoren zu diesem Zweck sechs Ansätze um das System vor Angriffen zu schützen: Prevention, Preemption, Deterrence, Deflection, Detection und Countermeasures. Auf diesen Ansätzen basierend bauen die Autoren ihr Defence-in-Depth-Modell mit den vier Stufen Prevention, Detection, Deflection und Forensics auf. Es folgt eine Erläuterung der vier Stufen mit Beispielen für entsprechende Schutzmaßnahmen.
+
+\subsection{Prevention}
+Im Defense-in-Depth-Modell von Nilsson und Larson bezieht sich die Stufe Prevention auf den ersten Schutzschritt in der mehrschichtigen Sicherheitsstrategie. Diese Stufe konzentriert sich darauf, potenzielle Bedrohungen zu erkennen und zu verhindern, bevor sie zu einer tatsächlichen Gefahr werden.
+Zu diesem Zweck werden präventive Maßnahmen ergriffen, um Sicherheitslücken zu schließen, Schwachstellen zu minimieren und Angriffe von vornherein zu verhindern. Dies umfasst die Implementierung von Sicherheitsrichtlinien, Best Practices und technischen Kontrollen, um potenzielle Angriffe abzuwehren. Es  folgen einige Beispiele für präventive Maßnahmen.
+
+\subsubsection{Zugangskontrollen}
+Durch die Implementierung von Authentifizierungs- und Autorisierungsmechanismen wird sichergestellt, dass nur autorisierte Personen oder Systeme Zugriff auf sensible Ressourcen haben.\\
+Ein Ansatz dafür ist zum Beispiel das Schützen des \acs{OBD}-II Ports durch Authentifizierung. Dies kann über den Einsatz von Schlüsseln, Zertifikaten und verschiedenen Benutzerrollen umgesetzt werden \cite[133]{Wurm.2022}.\\
+Außerdem kann es helfen, gültige Verbindungen zu den jeweiligen Schnittstellen im Vorhinein per Whitelist zu definieren, so dass unbekannte Verbindungen direkt abgelehnt werden \cite[185]{Wurm.2022}
 
 
+\subsubsection{Firewall und Intrusion Prevention Systeme}
+Diese Technologien helfen dabei, den Datenverkehr zu überwachen, verdächtige Aktivitäten zu erkennen und unerwünschten Zugriff zu blockieren.
+Mit einer Firewall lässt sich nicht nur ein Zugriff von außen verhindern, sondern auch eine Segmentierung des fahrzeuginternen Netzwerks umsetzen \cite[147]{Wurm.2022}.
+
+
+\subsubsection{Verschlüsselung}
+Durch die Verwendung von Verschlüsselungstechniken können Daten geschützt und vor unbefugtem Zugriff geschützt werden.
+
+\subsubsection{Sicherheitsrichtlinien und -verfahren}
+Durch die Entwicklung und Umsetzung von Sicherheitsrichtlinien sowie die Schulung der Mitarbeiter in sicherheitsrelevanten Verhaltensweisen können potenzielle Schwachstellen minimiert werden.
+
+\subsubsection{Sicherheits-Patches und Updates} 
+Regelmäßige Aktualisierungen von Software und Betriebssystemen sind entscheidend, um bekannte Sicherheitslücken zu beheben und potenzielle Angriffspunkte zu schließen.
+
+%\subsection{SecureBoot}
+%\cite{Wurm.2022}[84]
+
+
+\subsection{Detection}
+Die Stufe Detection im Defense-in-Depth-Modell von Nilsson und Larson konzentriert sich darauf, potenzielle Angriffe und Sicherheitsverletzungen zu erkennen, sobald sie auftreten oder stattfinden.
+Die Stufe umfasst verschiedene Mechanismen und Technologien, die darauf abzielen, Anomalien, verdächtige Aktivitäten oder Indikatoren für Sicherheitsverletzungen zu identifizieren. Durch die rechtzeitige Erkennung solcher Vorfälle kann schnell reagiert werden, um potenziellen Schaden zu begrenzen und weitere Angriffe zu verhindern.
+
+\subsubsection{Intrusion Detection Systeme} 
+Diese Systeme überwachen den Netzwerkverkehr und analysieren ihn auf Anzeichen von Angriffen oder ungewöhnlichem Verhalten. Sie können dabei helfen, potenzielle Sicherheitsverletzungen zu erkennen und Warnmeldungen auszulösen.
+
+Security Information and Event Management (SIEM): SIEM-Systeme sammeln und analysieren Protokolldaten aus verschiedenen Quellen, um verdächtige Aktivitäten zu identifizieren und Sicherheitsereignisse zu erkennen. Durch die Korrelation von Ereignissen können Angriffe frühzeitig erkannt werden.
+
+Anomalieerkennung: Durch die Überwachung von Systemen, Benutzerverhalten und Netzwerkverkehr können ungewöhnliche Muster oder Abweichungen von der Norm erkannt werden, die auf einen möglichen Angriff hinweisen.
+
+Log- und Ereignisüberwachung: Die Analyse und Überwachung von Protokolldaten kann helfen, potenzielle Sicherheitsvorfälle zu erkennen, indem verdächtige Aktivitäten oder Verhaltensmuster identifiziert werden.
+
+Security Operations Center (SOC): Ein SOC ist eine zentrale Einheit, die Sicherheitsüberwachung und -reaktion durchführt. Es kann sowohl automatisierte Tools als auch Sicherheitsexperten umfassen, die verdächtige Aktivitäten überwachen, Sicherheitsvorfälle untersuchen und entsprechende Maßnahmen ergreifen.
+
+Die Stufe "Detection" zielt darauf ab, Angriffe oder Sicherheitsverletzungen frühzeitig zu erkennen, um eine schnelle Reaktion und Eingriffe zu ermöglichen. Durch die Kombination von präventiven Maßnahmen in der Stufe "Prevention" mit effektiven Erkennungsmechanismen in der Stufe "Detection" kann eine umfassendere Sicherheitsstrategie entwickelt werden, um Bedrohungen zu bewältigen und möglichen Schaden zu minimieren.
+\subsubsection{Intrusion Detection}
+\cite[152]{Wurm.2022}
+
+
+\subsection{Deflection}
+\subsubsection{Netzwerksegmentierung}
+\cite[144]{Wurm.2022}
+Code Signierung \cite{MillerCharlie.2019}
+
+
+
+
+
+
+
+
+
+\section{Sichere Produktionsumgebung}
+\cite[219]{Wurm.2022}
 
 \section{Herausforderungen der Automotive Security}
 \cite[36]{Wurm.2022} + 233 (AM-Devices)
 
-\subsection{SecureBoot}
-\cite{Wurm.2022}[84]
+
+
+
+\chapter{Fazit}
+größtes Hindernis Reverse-Engineering
