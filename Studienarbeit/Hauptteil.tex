@@ -76,7 +76,7 @@ Der zweite Ansatz ist skalierbarer, da ohne großen Aufwand neue Knoten hinzugef
 
 
 \subsection{FlexRay}
-Der \ac{CAN} Standard weist neben seinen Stärken auch einige Schwächen auf. Beispielsweise ist die realistisch erreichbare Datenrate beschränkt, zudem lassen sich sehr hohe Datenraten nur mit kurzen Stichverbindungen erreichen. Außerdem verfügt das System nur über einen Kanal und versagt somit bei Ausfall der Busverbindung. Aus diesen Gründen hielten viele Fachleute eine Neuentwicklung für notwendig und sinnvoll \cite[96]{Zimmermann.2014}. Daher wurde FlexRay als Ersatz für \acs{CAN} entwickelt. In der Praxis wird es allerdings größtenteils mehr als Ergänzung als als vollständiger Ersatz eingesetzt \cite[97]{Zimmermann.2014}. Dies könnte an den höheren Kosten aufgrund größerer Komplexität von FlexRay liegen.s FlexRay ermöglicht Aufbauten in Linien- und Sterntopologien. Diese können einkanalig oder zweikanalig sein.\\
+Der \ac{CAN} Standard weist neben seinen Stärken auch einige Schwächen auf. Beispielsweise ist die realistisch erreichbare Datenrate beschränkt, zudem lassen sich sehr hohe Datenraten nur mit kurzen Stichverbindungen erreichen. Außerdem verfügt das System nur über einen Kanal und versagt somit bei Ausfall der Busverbindung. Aus diesen Gründen hielten viele Fachleute eine Neuentwicklung für notwendig und sinnvoll \cite[96]{Zimmermann.2014}. Daher wurde FlexRay als Ersatz für \acs{CAN} entwickelt. In der Praxis wird es allerdings größtenteils mehr als Ergänzung als als vollständiger Ersatz eingesetzt \cite[97]{Zimmermann.2014}. Dies könnte an den höheren Kosten aufgrund größerer Komplexität von FlexRay liegen. FlexRay ermöglicht Aufbauten in Linien- und Sterntopologien. Diese können einkanalig oder zweikanalig sein.\\
 Der Aufbau einer FlexRay-Botschaft ist in Abbildung \ref{fig:FlexRayBotschaft} veranschaulicht. Zu Beginn einer FlexRay-Botschaft stehen 5 Steuerbits, in denen Sonderinformationen über die Nachricht angezeigt werden können. Anschließend folgen die Frame ID mit dem Zeitslot der Botschaft, die Nutzdatenlänge, eine Cyclic-Redundancy-Check-Prüfsumme und ein Zykluszähler. 
 
 
@@ -94,7 +94,7 @@ Das \ac{MOST} Protokoll wird vor allem in Infotainment-Systemen von Autos einges
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{Grzemba_MOST_NetworkMasterSlave}
+\includegraphics[width=0.7\textwidth]{Grzemba_MOST_NetworkMasterSlave}
 \label{fig:MOST-NetworkMasterSlave}
 \caption{Ringtopologie eines \acs{MOST}-Bus}
 \quelle{\cite[40]{Grzemba.2007}}
@@ -119,8 +119,8 @@ Der Aufbau eines \acs{MOST}25-Pakets ist in Abbildung \ref{fig:MOST-frame} darge
 
 
 \subsection{Automotive Ethernet}
-Die Vielzahl inkompatibler und nur in der Automobilindustrie verwendeter Lösungen resultierte in hohen Kosten und kontinuierlichem Weiterentwicklungsaufwand. Zudem steigt der Bandbreitenbedarf. Daher wird das im Bürobereich etablierte Konzept Ethernet/IP relevanter für den Automobilbereich. \cite[138]{Zimmermann.2014}\\
-Die in diesem Standard verwendeten Protokolle \ac{IP}, \ac{TCP} und \ac{UDP} werden außerdem bereits von den meisten computerähnlichen Geräten unterstützt. Das ermöglicht eine transparente Kommunikation und vereinfacht die Integration von Consumergeräten erheblich \cite{Zimmermann.2014}. Ethernet war ursprünglich ein Linienbussystem, wird heutzutage aber meistens als Sterntopologie mit Switches an Kopplungspunkten umgesetzt. \\
+Die Vielzahl inkompatibler und nur in der Automobilindustrie verwendeter Lösungen resultierte in hohen Kosten und kontinuierlichem Weiterentwicklungsaufwand. Zudem steigt der Bandbreitenbedarf. Daher wird das bereits im Bürobereich etablierte Konzept Ethernet/IP relevanter für den Automobilbereich. \cite[138]{Zimmermann.2014}\\
+Die in diesem Standard verwendeten Protokolle \ac{IP}, \ac{TCP} und \ac{UDP} werden außerdem schon von den meisten computerähnlichen Geräten unterstützt. Das ermöglicht eine transparente Kommunikation und vereinfacht die Integration von Consumergeräten erheblich \cite{Zimmermann.2014}. Ethernet war ursprünglich ein Linienbussystem, wird heutzutage aber meistens als Sterntopologie mit Switches an Kopplungspunkten umgesetzt. \\
 In Abbildung \ref{fig:EthernetPaket} ist der Aufbau eines Ethernet-Pakets dargestellt. 
 Die Präambel und der Start Frame Delimiter spielen eine Rolle bei der Taktsynchronisation bei manchen Physical Layern. Die Ziel- und Quell-MAC-Adresse dienen der Geräteadressierung. Das VLAN-Tag erlaubt die Bildung von Unternetzen. Das Typfeld kennzeichnet den Typ des Inhalts des darauf folgenden Datenfelds. Das Datenfeld enthält den eigentlichen Nachrichteninhalt. Am Ende jedes Pakets befindet sich noch die Frame Check Sequence zur Detektion von Übertragungsfehlern. Beim Eintritt eines Übertragungsfehlers wird die Botschaft automatisch vom Empfänger verworfen. \cite[140]{Zimmermann.2014}\\
 
@@ -182,8 +182,8 @@ Um die genannten Features umsetzen zu können, ist größtenteils eine Verbindun
 Zu dieser letzten Kategorie zählen alle Zugriffskanäle, die aus großer Entfernung, nämlich mehr als einem Kilometer, zugegriffen werden kann. Immer mehr Autos bieten auch derartige Schnittstellen. Diese lassen sich in zwei Kategorien einteilen: Broadcast Kanäle und Adressierbare Kanäle. \cite[4]{Checkoway.2011}
 
 \subsubsection{Broadcast Kanäle}
-Broadcast Kanäle sind Kanäle, die nicht speziell auf ein bestimmtes Fahrzeug ausgerichtet sind, sondern von Empfängern nach Bedarf empfangen werden können. Neben der externen Angriffsfläche können weitreichende Broadcastmedien als Steuerungskanäle attraktiv sein (z. B. zum Auslösen von Angriffen), da sie schwer zuzuordnen sind, mehrere Empfänger gleichzeitig steuern können und Angreifer keine genaue Adressierung ihrer Opfer benötigen.
-Das moderne Automobil umfasst eine Vielzahl von Empfängern für weitreichende Signale: \ac{GPS}, Satellitenradio, Digitalradio und das Radio Data System (RDS) und der Traffic Message Channel (TMC), die als digitale Unterträger auf vorhandenen FM-Bändern übertragen werden. Die Reichweite solcher Signale hängt von der Sendeleistung, Modulation, Gelände und Störungen ab. Im Allgemeinen werden diese Kanäle in das Mediasystem eines Autos (Radio, CD-Player, Satellitenempfänger) implementiert, das, wie bereits erwähnt, häufig über interne Automobilnetzwerke Zugriff auf andere wichtige Automotive-ECUs ermöglicht. \cite[4\psq]{Checkoway.2011}
+Broadcast Kanäle sind Kanäle, die nicht speziell auf ein bestimmtes Fahrzeug ausgerichtet sind, sondern von Empfängern nach Bedarf empfangen werden können. 
+Das moderne Automobil umfasst eine Vielzahl von Empfängern für weit reichende Broadcast-Signale: \ac{GPS}, Satellitenradio, Digitalradio und das Radio Data System (RDS) und der Traffic Message Channel (TMC), die als digitale Unterträger auf vorhandenen FM-Bändern übertragen werden. Die Reichweite solcher Signale hängt von der Sendeleistung, Modulation, Gelände und Störungen ab. Im Allgemeinen werden diese Kanäle in das Mediasystem eines Autos (Radio, CD-Player, Satellitenempfänger) implementiert, das, wie bereits erwähnt, häufig über interne Automobilnetzwerke Zugriff auf andere wichtige \acsp{ECU} ermöglicht. \cite[4\psq]{Checkoway.2011}
 
 \subsubsection{Adressierbare Kanäle}
 Über adressierbare Kanäle lassen sich individuelle Fahrzeuge direkt ansteuern. Die Verbindung erfolgt in der Regel über das Mobilfunknetz.\\
@@ -197,7 +197,7 @@ Da diese Kanäle meist eine hohe Bandbreite bieten, über große Distanzen und i
 
 \section{Cyber Security}
 Als nächstes werden die Grundlagen der Cyber Security und IT Sicherheit erläutert, die im Bereich der Automotive Security relevant sind. Die IT Security befasst sich eher mit der Sicherheit von elektronisch gespeicherten Daten während die Cyber Security diese Sicherheit auf ganze Systeme, Netzwerke und Kommunikation ausweitet.
-Die Begriffe Cyber- und IT Security sind jedoch eng miteinander verwandt und werden oft als Synonym verwendet.
+Die Begriffe Cyber- und IT Security sind jedoch eng miteinander verwandt und werden häufig als Synonym verwendet.
 
 \subsection{Security und Safety}
 Der deutsche Begriff \glqq Sicherheit\grqq{} ist mehrdeutig, was ihn für eine genaue, technische Definition ungeeignet macht. In der IT-Sicherheit wird zwischen den beiden englischen Begriffen \glqq Safety\grqq{} und \glqq Security\grqq{} unterschieden.
@@ -249,7 +249,7 @@ Die Authentizität von Informationen ist eng mit der Integrität von Information
 Der Begriff Nichtabstreitbarkeit wird oft ähnlich verwendet, spielt jedoch insbesondere in rechtlichen Angelegenheiten wie Haftung und Gewährleistung eine Rolle. Es wurde festgestellt, dass die Abstreitbarkeit eine potenzielle Schwachstelle darstellt. Wenn zum Beispiel der Empfang oder das Senden bestimmter kritischer Nachrichten, wie Warnungen vor Stauenden oder Geschwindigkeitsbegrenzungen, bestritten werden kann, ist eine rechtssichere Zuordnung nicht möglich und eine mögliche Strafverfolgung wird erschwert. Ohne das Schutzziel der Nichtabstreitbarkeit könnte jeder Teilnehmer bestreiten, eine bestimmte Nachricht gesendet oder empfangen zu haben. Die technische Umsetzung kann durch manipulationssichere Log-Speicher erfolgen, die den Empfang bestimmter Nachrichten protokollieren und nachweisen können. Die Nichtabstreitbarkeit der Urheberschaft einer gesendeten Nachricht wird durch das digitale Signaturverfahren in Verbindung mit einer vertrauenswürdigen Public-Key-Infrastruktur gewährleistet. \cite[8]{Wurm.2022}
 
 \subsubsection{Schutz der Privatsphäre}
-Moderne Fahrzeuge und Hersteller erheben, verarbeiten und speichern personenbezogene Daten. Beispielsweise wird die Position des Autos im Rahmen der \ac{V2X}-Kommunikation zyklisch veröffentlicht. Hierbei ist es zum einen im Interesse der betroffenen Person, des Fahrers, dass sich diese Daten sich nicht zu den betroffenen Personen zuordnen lassen. Außerdem ist es aber auch durch die Datenschutzgrundverordnung, die im Jahr 2018 in Kraft trat. Technisch lässt sich der Schutz der Privatsphäre zum Beispiel mit einer Tarnidentität umsetzen.
+Moderne Fahrzeuge und Hersteller erheben, verarbeiten und speichern personenbezogene Daten. Beispielsweise wird die Position des Autos im Rahmen der \ac{V2X}-Kommunikation zyklisch veröffentlicht. Hierbei ist es zum einen im Interesse der betroffenen Person, des Fahrers, dass sich diese Daten sich nicht zu den betroffenen Personen zuordnen lassen. Außerdem ist es aber auch durch die Datenschutzgrundverordnung, die im Jahr 2018 in Kraft trat, gesetzlich vorgeschrieben. Technisch lässt sich der Schutz der Privatsphäre zum Beispiel mit einer Tarnidentität umsetzen.
 
 
 \subsection{Risikomanagement}
@@ -295,7 +295,7 @@ Die Kryptographie spielt im Zusammenhang mit der Sicherheit von Kraftfahrzeugen 
 
 
 \chapter{Angriffsflächen von Fahrzeugen}
-Nun da die wichtigsten theoretischen Grundlagen zu Automotive Netzwerken und Cyber Security behandelt wurden, gilt es, die beiden Themenbereiche zusammenzuführen. Hierzu sollen zunächst verschiedene Angriffsflächen von Automobilen untersucht werden. Interessant ist hierbei vor allem, über welche Wege Angreifer sich Zugang zum Fahrzeugnetzwerk verschaffen, wie sie dort ihren Einfluss ausweiten können und wie groß das Risiko für ein Eintreffen des jeweiligen Angriffs ist. 
+Nun da die wichtigsten theoretischen Grundlagen zu Automotive Netzwerken und Cyber Security behandelt wurden, gilt es, die beiden Themenbereiche zusammenzuführen. Hierzu sollen zunächst verschiedene Angriffsflächen von Automobilen untersucht werden. Interessant ist hierbei vor allem, über welche Wege Angreifer sich Zugang zum Fahrzeugnetzwerk verschaffen, wie sie dort ihren Einfluss ausweiten können und wie groß das Risiko für ein Eintreffen des jeweiligen Angriffs ist. Die Risikoeinteilung soll an das Vorbild der Risikomatrix angelehnt in geringe, mittlere und große Risiken anhand von Eintrittswahrscheinlichkeit und Schadensausmaß erfolgen.
 
 %\cite[27]{Wurm.2022}
 %evt Kapitel 5
@@ -332,7 +332,7 @@ Der OBD-II Port bietet direkten Zugriff auf den \acs{CAN}-Bus eines Fahrzeugs. D
 
 \subsection{Bootvorgang}
 Mit Bootvorgang ist der Startvorgang eines Rechnersystems gemeint. Der Bootprozess ist ein attraktives Ziel für Angreifer, da beim Starten des Systems eventuell viele Sicherheitsmaßnahmen umgangen werden können. Ein Angreifer kann die Funktionsweise des Systems manipulieren, um unautorisierten Zugriff auf sensible Daten zu erhalten oder Fehlfunktionen auszulösen, die die Sicherheit des Fahrzeugs gefährden können. Darüber hinaus können die Manipulationen zu Schäden an Systemkomponenten führen oder sensible Informationen gestohlen werden. Ein Angriff auf den Bootprozess erfordert entweder das Einschleusen von manipuliertem Programmcode oder die Manipulation des vorhandenen Codes. Sogar minimale Veränderungen können hier bereits zu Sicherheitsrisiken führen. Eine weitere Möglichkeit ist das Downgrade der Software, indem aktuelle Versionen durch ältere ersetzt werden, die Schwachstellen aufweisen können. \cite[83]{Wurm.2022} \\
-Um das Risiko eines solchen Angriffs zu minimieren sind Maßnahmen erforderlich.
+Um das Risiko eines solchen Angriffs zu minimieren sind Maßnahmen wie zum Beispiel ein Secure-Boot-System erforderlich.
 
 \subsection{Passive Anti-Theft System}
 Viele moderne Autos haben einen kleinen Chip im Zündschlüssel, der mit den Sensoren des Fahrzeugs kommuniziert. In manchen Fällen ist dieser Sensor direkt mit dem Radio Frequency Hub Module (RFHM) verbunden. Wenn der Zündknopf gedrückt wird, sendet der Fahrzeugcomputer ein RF-Signal, das vom Transponder im Schlüssel empfangen wird. Der Transponder sendet daraufhin ein eindeutiges RF-Signal an den Fahrzeugcomputer zurück und bestätigt damit den Start und die Weiterfahrt. Wenn der Computer nicht den korrekten Identifizierungscode empfängt, bleiben bestimmte Komponenten wie der Anlasser deaktiviert.
@@ -347,7 +347,8 @@ Aufgrund der fehlenden Paketvalidierung hat diese Art von Angriff eine ernst zu 
 \subsection{Bluetooth}
 Auch die Bluetooth-Schnittstelle bietet Schwachstellen, die als Angriffsfläche genutzt werden können. So führten Checkoway et al 2011 einen erfolgreichen Angriff auf ein Testfahrzeug über Bluetooth durch \cite[9]{Checkoway.2011}. In der Regel wird diese Schnittstelle genutzt, um ein Smartphone mit dem Fahrzeug zu verbinden. In ihrem ersten Anlauf verwendeten die Hacker also ein bereits mit dem Fahrzeug gekoppeltes Smartphone. Auf dieses spielten sie einen Trojaner auf, der bei Verbindung mit einem Auto die Übertragung von Schadcode startet. Auf diese Weise konnte das Team die Kontrolle über das Infotainment-System übernehmen. \\
 In ihrem zweiten Anlauf wollten die Hacker herausfinden, ob sich das System auch ohne ein bereits gekoppeltes Gerät hacken lässt. Sie fanden heraus, dass auch ohne Interaktion des Benutzers auch ein fremdes Smartphone mit dem Fahrzeug gekoppelt werden kann. Hierfür muss zunächst die Bluetooth-MAC-Adresse des Fahrzeugs herausgefunden werden, um Pairing-Anfragen zu senden. Die MAC-Adresse lässt sich durch ein Sniffen des Bluetooth-Datenverkehrs des Fahrzeugs mit einem gekoppelten Gerät in Erfahrung bringen. Dies kann zum Beispiel geschehen, wenn der Benutzer das Fahrzeug startet und währenddessen sein Smartphone bei sich trägt. Anschließend folgt die Kopplung. \\
-Normalerweise erfolgt das Hinzufügen eines neuen Gerätes über das Benutzerinterface. Das Team um Checkoway fand jedoch heraus, dass das Zielfahrzeug auch ohne ein Zutun des Benutzers auf Kopplungsanfragen reagiert. Somit fehlt zum erfolgreichen Pairing nur noch das gemeinsame Geheimnis. Beim normalen Koppelvorgang wird hierzu auf dem Display des Fahrzeugs ein PIN angezeigt, der auf dem Smartphone eingegeben werden muss. Dieser PIN wird zufällig generiert. Die Hacker waren jedoch in der Lage, diesen PIN mit einer Brute-Force-Attacke herauszufinden. Währenddessen waren innerhalb des Fahrzeugs keine Anzeichen für einen Angriff erkennbar. Ein Nachteil dieser Vorgehensweise ist es, dass das Knacken des PINs per Brute-Force aufgrund der Antwortzeit des Fahrzeugs viele Stunden in Anspruch nehmen kann. Das Fahrzeug muss während dieses gesamten Vorgangs angeschaltet sein. Allerdings merkt Checkoway an, dass mit dieser Methode auch viele Fahrzeuge gleichzeitig angegriffen werden können, beispielsweise in einem Parkhaus oder Stau \cite[9]{Checkoway.2011}. Somit ist die Wahrscheinlichkeit höher, dass einer der PINs in kurzer Zeit geknackt werden kann.
+Normalerweise erfolgt das Hinzufügen eines neuen Gerätes über das Benutzerinterface. Das Team um Checkoway fand jedoch heraus, dass das Zielfahrzeug auch ohne ein Zutun des Benutzers auf Kopplungsanfragen reagiert. Somit fehlt zum erfolgreichen Pairing nur noch das gemeinsame Geheimnis. Beim normalen Koppelvorgang wird hierzu auf dem Display des Fahrzeugs ein PIN angezeigt, der auf dem Smartphone eingegeben werden muss. Dieser PIN wird zufällig generiert. Die Hacker waren jedoch in der Lage, diesen PIN mit einer Brute-Force-Attacke herauszufinden. Währenddessen waren innerhalb des Fahrzeugs keine Anzeichen für einen Angriff erkennbar. \\
+Ein Nachteil dieser Vorgehensweise ist es, dass das Knacken des PINs per Brute-Force aufgrund der Antwortzeit des Fahrzeugs viele Stunden in Anspruch nehmen kann. Das Fahrzeug muss während dieses gesamten Vorgangs angeschaltet sein. Allerdings merkt Checkoway an, dass mit dieser Methode auch viele Fahrzeuge gleichzeitig angegriffen werden können, beispielsweise in einem Parkhaus oder Stau \cite[9]{Checkoway.2011}. Somit ist die Wahrscheinlichkeit höher, dass einer der PINs in kurzer Zeit geknackt werden kann.\\
 Nach erfolgreicher Kopplung kann dann wie beim ersten Angriff weiter verfahren werden. 
 Das Risiko für das erste Szenario ist recht hoch. Es muss lediglich ein Smartphone mit einem Trojaner infiziert werden, um bereits großen Schaden anzurichten. Das Risiko des zweiten Szenarios ist einerseits geringer, da der Brute-Force-Angriff sehr viel Zeit erfordert. Andererseits ist dafür keine Benutzerinteraktion erforderlich und der Benutzer bemerkt den Angriff womöglich nicht einmal. Außerdem gibt es aus eigener Erfahrung auch Automodelle, bei denen der PIN für die Bluetooth-Kopplung nicht zufällig generiert wird sondern immer \glqq 0000\grqq{} beträgt. Diese Sicherheitslücke erhöht das Risiko noch einmal drastisch.
 
@@ -357,12 +358,12 @@ Garcia et al untersuchten im Jahr 2016 die Sicherheit von Remote Keyless Entry S
 Dieses Diebstahlrisiko ist hoch einzuschätzen, da ein Angreifer mit dem notwendigen Know-How den Angriff fast ohne Kooperation des Benutzers durchführen kann. Für einen (Fern-)Steuerungsangriff über diese Schnittstelle allerdings sehr gering, da wie beim Passive Anti-Theft System nur sehr wenige Daten übertragen werden, die kaum Spielraum für zu injizierenden Schadcode bieten.
 
 \subsection{Radio}
-Das Radio empfängt nicht nur Audiosignale, sondern auch andere Daten. Im Jeep hat das Radio viele solcher externen Eingänge, wie z. B. GPS, AM/FM-Radio und Satellitenradio. In den meisten Fällen werden diese Signale in Audiosignale umgewandelt und enthalten normalerweise keine ausnutzbaren Sicherheitslücken, da sie kein signifikantes Parsing der Daten durchführen. Eine mögliche Ausnahme ist das Radio Data System, das Daten zusammen mit FM-Analogsignalen (oder dem Äquivalent im Satellitenradio) sendet. Benutzer sehen dies typischerweise, wenn das Radio den Namen des Senders oder den Titel des abgespielten Songs ansagt. Hier müssen die Daten analysiert und angezeigt werden, was eine potenzielle Sicherheitslücke darstellen kann. \cite[17]{Miller.2015} \\
+Das Radio empfängt nicht nur Audiosignale, sondern auch andere Daten. Im Jeep Cherokee aus dem Angriff von Miller und Valasek hat das Radio viele solcher externen Eingänge, wie z. B. GPS, AM/FM-Radio und Satellitenradio. In den meisten Fällen werden diese Signale in Audiosignale umgewandelt und enthalten normalerweise keine ausnutzbaren Sicherheitslücken, da sie kein signifikantes Parsing der Daten durchführen. Eine mögliche Ausnahme ist das Radio Data System, das Daten zusammen mit FM-Analogsignalen (oder dem Äquivalent im Satellitenradio) sendet. Benutzer sehen dies typischerweise, wenn das Radio den Namen des Senders oder den Titel des abgespielten Songs ansagt. Hier müssen die Daten analysiert und angezeigt werden, was eine potenzielle Sicherheitslücke darstellen kann. \cite[17]{Miller.2015} \\
 Ein Angriff über diese Schnittstelle könnte sehr breit gestreut durchgeführt werden, da die erforderlichen Radiosignale in einem großen Bereich gesendet werden können. Allerdings ist fraglich, wie groß der Spielraum für das injizieren von Schadcode in diesem Szenario tatsächlich ist. In der Praxis haben sich andere Fernangriffskanäle als wirkungsvoller erwiesen. Daher ist das Risiko moderat.
 
 \subsection{WLAN}
 Manche Fahrzeuge bieten die Möglichkeit, als \ac{WLAN}-Hotspot zu fungieren. Angriffe auf \acs{WLAN}-Hotspots sind auch außerhalb des Automotive-Kontexts bereits ausreichend bekannt. Daher stellt diese Schnittstelle ebenfalls eine ernst zu nehmende  Angriffsfläche für die Übernahme der Kontrolle über das Infotainment-System dar. Beispielsweise gelang es einem Hackerteam, einen erfolgreichen Buffer-Overflow-Angriff auf ein solches System durchzuführen \cite[18]{Miller.2015}.\\
-Ein Angriff auf diese Schnittstelle stellt in Sachen Eintrittswahrscheinlichkeit und Ausmaß ein ähnlich großes Risiko wie ein Angriff über Bluetooth, wenn nicht sogar noch größer.
+Ein Angriff auf diese Schnittstelle stellt in Sachen Eintrittswahrscheinlichkeit und Ausmaß ein ähnlich großes Risiko wie ein Angriff über Bluetooth dar, wenn nicht sogar noch größer.
 
 \subsection{Mobilfunk}
 Die für Hacker wahrscheinlich interessanteste Angriffsfläche ist die Mobilfunk-Schnittstelle moderner Autos. Das liegt daran, dass die Reichweite hier nicht begrenzt ist. Ein Zugriff kann von nahezu überall auf der Welt durchgeführt werden. Die Machbarkeit eines Angriffs über das Mobilfunknetz wurde bereits in mehreren akademischen Hackerangriffen auf Autos eindrucksvoll demonstriert. So gelang es zum Beispiel auch dem Team um Steven Checkoway, sich Kontrolle über das Infotainment-System eines Fahrzeugs über das Mobilfunknetz zu verschaffen. Durch eine Schwachstelle im Gateway der Einheit konnten sie einen Buffer-Overflow-Angriff durchführen. Außerdem gelang es ihnen, durch wiederholtes Anrufen des Fahrzeugs die eigentlich für das Gateway erforderliche Authentifizierung zu umgehen. Sie zeigten außerdem, dass der Angriff komplett blind durchgeführt werden kann. \cite[11]{Checkoway.2011} \\
@@ -431,7 +432,7 @@ Zu diesem Zweck werden präventive Maßnahmen ergriffen, um Sicherheitslücken z
 \subsubsection{Zugangskontrollen}
 Durch die Implementierung von Authentifizierungs- und Autorisierungsmechanismen wird sichergestellt, dass nur autorisierte Personen oder Systeme Zugriff auf sensible Ressourcen haben.\\
 Ein Ansatz dafür ist zum Beispiel das Schützen des \acs{OBD}-II Ports durch Authentifizierung. Dies kann über den Einsatz von Schlüsseln, Zertifikaten und verschiedenen Benutzerrollen umgesetzt werden \cite[133]{Wurm.2022}.\\
-Außerdem kann es helfen, gültige Verbindungen zu den jeweiligen Schnittstellen im Vorhinein per Whitelist zu definieren, so dass unbekannte Verbindungen direkt abgelehnt werden \cite[185]{Wurm.2022}
+Außerdem kann es helfen, gültige Verbindungen zu den jeweiligen Schnittstellen im Vorhinein per Whitelist zu definieren, so dass unbekannte Verbindungen direkt abgelehnt werden \cite[185]{Wurm.2022}.
 
 
 \subsubsection{Firewall und Intrusion Prevention Systeme}
@@ -457,42 +458,96 @@ Die Stufe Detection im Defense-in-Depth-Modell von Nilsson und Larson konzentrie
 Die Stufe umfasst verschiedene Mechanismen und Technologien, die darauf abzielen, Anomalien, verdächtige Aktivitäten oder Indikatoren für Sicherheitsverletzungen zu identifizieren. Durch die rechtzeitige Erkennung solcher Vorfälle kann schnell reagiert werden, um potenziellen Schaden zu begrenzen und weitere Angriffe zu verhindern.
 
 \subsubsection{Intrusion Detection Systeme} 
-Diese Systeme überwachen den Netzwerkverkehr und analysieren ihn auf Anzeichen von Angriffen oder ungewöhnlichem Verhalten. Sie können dabei helfen, potenzielle Sicherheitsverletzungen zu erkennen und Warnmeldungen auszulösen.
+Diese Systeme überwachen den Netzwerkverkehr und analysieren ihn auf Anzeichen von Angriffen oder ungewöhnlichem Verhalten. Sie können dabei helfen, potenzielle Sicherheitsverletzungen zu erkennen und Warnmeldungen auszulösen. Es wird unterschieden zwischen Host-basierten und Netzwerk-basierten Intrusion Detection Systemen, wobei erstere das Verhalten einer einzelnen \acs{ECU} und letztere den Verkehr eines gesamten Netzwerks überwachen \cite[153]{Wurm.2022}.
 
-Security Information and Event Management (SIEM): SIEM-Systeme sammeln und analysieren Protokolldaten aus verschiedenen Quellen, um verdächtige Aktivitäten zu identifizieren und Sicherheitsereignisse zu erkennen. Durch die Korrelation von Ereignissen können Angriffe frühzeitig erkannt werden.
+\subsubsection{Security Information and Event Management} 
+SIEM-Systeme sammeln und analysieren Protokolldaten aus verschiedenen Quellen, um verdächtige Aktivitäten zu identifizieren und Sicherheitsereignisse zu erkennen. Durch die Korrelation von Ereignissen können Angriffe frühzeitig erkannt werden.
 
-Anomalieerkennung: Durch die Überwachung von Systemen, Benutzerverhalten und Netzwerkverkehr können ungewöhnliche Muster oder Abweichungen von der Norm erkannt werden, die auf einen möglichen Angriff hinweisen.
+\subsubsection{Anomalieerkennung}
+Durch die Überwachung von Systemen, Benutzerverhalten und Netzwerkverkehr können ungewöhnliche Muster oder Abweichungen von der Norm erkannt werden, die auf einen möglichen Angriff hinweisen. Eine leicht erkennbare Anomalie wäre zum Beispiel das Senden diagnostischer Pakete auf dem \acs{CAN}-Bus während des Fahrtbetriebs.
 
-Log- und Ereignisüberwachung: Die Analyse und Überwachung von Protokolldaten kann helfen, potenzielle Sicherheitsvorfälle zu erkennen, indem verdächtige Aktivitäten oder Verhaltensmuster identifiziert werden.
+\subsubsection{Log- und Ereignisüberwachung}
+Die Analyse und Überwachung von Protokolldaten kann helfen, potenzielle Sicherheitsvorfälle zu erkennen, indem verdächtige Aktivitäten oder Verhaltensmuster identifiziert werden. Diese Daten können auch nach dem Angriff forensisch analysiert werden.
 
-Security Operations Center (SOC): Ein SOC ist eine zentrale Einheit, die Sicherheitsüberwachung und -reaktion durchführt. Es kann sowohl automatisierte Tools als auch Sicherheitsexperten umfassen, die verdächtige Aktivitäten überwachen, Sicherheitsvorfälle untersuchen und entsprechende Maßnahmen ergreifen.
 
-Die Stufe "Detection" zielt darauf ab, Angriffe oder Sicherheitsverletzungen frühzeitig zu erkennen, um eine schnelle Reaktion und Eingriffe zu ermöglichen. Durch die Kombination von präventiven Maßnahmen in der Stufe "Prevention" mit effektiven Erkennungsmechanismen in der Stufe "Detection" kann eine umfassendere Sicherheitsstrategie entwickelt werden, um Bedrohungen zu bewältigen und möglichen Schaden zu minimieren.
-\subsubsection{Intrusion Detection}
-\cite[152]{Wurm.2022}
 
 
 \subsection{Deflection}
+Die Aufgabe der dritten Stufe Deflection ist es, Angriffe abzulenken, zu verlangsamen oder zu erschweren, um potenzielle Angreifer zu entmutigen oder aufdecken zu können (siehe Detection).
+Das Ziel besteht darin, dem Angreifer den Zugang zu sensiblen Systemen, Daten oder Ressourcen zu erschweren und sie auf alternative Ziele umzulenken. Indem die Angreifer aufgehalten oder abgelenkt werden, gewinnt man wertvolle Zeit, um angemessene Gegenmaßnahmen zu ergreifen.
+
 \subsubsection{Netzwerksegmentierung}
-\cite[144]{Wurm.2022}
-Code Signierung \cite{MillerCharlie.2019}
+Durch die Aufteilung des Netzwerks in verschiedene Segmente oder Zonen mit unterschiedlichen Sicherheitsebenen können potenzielle Angreifer daran gehindert werden, sich frei im gesamten Netzwerk zu bewegen. An den Schnittstellen zwischen Segmenten muss dann eine strenge Kontrolle des Datenverkehrs erfolgen. Dies erschwert die laterale Bewegung im Netzwerk und begrenzt den Schaden im Falle eines erfolgreichen Angriffs. Um ein Netzwerk sinnvoll zu segmentieren, sollte sich an vergangenen, bekannten Angriffen orientiert werden \cite[145]{Wurm.2022}. Generell sollten Safety-relevante \acsp{ECU} von anfälligen \acsp{ECU} getrennt werden. Zum Beispiel haben vergangene Hackerangriffe gezeigt, dass das Infotainment-System durch seine Vielzahl an Schnittstellen nach außen sehr verwundbar gegenüber einer fremden Übernahme ist. Daher sollte es streng vom \acs{CAN}-Bus getrennt werden, an den sämtliche Safety-relevanten Systeme angeschlossen sind.
+
+\subsubsection{Firewalls und Zugriffskontrollmechanismen} 
+Diese bereits in der ersten Stufe vorgestellten Maßnahmen können nicht nur zur Prevention, sondern auch zur Deflection beitragen. Der Einsatz von Firewalls und Zugriffskontrollmechanismen ermöglicht es, den Datenverkehr zu überwachen und zu steuern. Dies hilft, unerlaubten Zugriff auf sensible Systeme oder Daten zu blockieren und potenzielle Angriffe abzuwehren.
+
+\subsubsection{Honeypots und Honeynets}
+Honeypots und Honeynets sind künstlich erstellte Systeme oder Netzwerke, die dazu dienen, Angreifer anzulocken und von den eigentlichen Zielen abzulenken. Indem Angreifer auf diese Attrappen gelenkt werden, können ihre Aktivitäten beobachtet, analysiert und Gegenmaßnahmen ergriffen werden.
+
+
+\subsubsection{CodeSignierung}
+Eine weitere Maßnahme um Angreifer aufzuhalten und einzuschränken ist das Signieren des Firmware-Codes um ihn zu verifizieren und vor fremden Änderungen zu schützen. Code mit einer falschen oder fehlenden Signatur kann somit einfach an der Ausführung gehindert werden. Zum Beispiel konnte der Angriff von Miller und Valasek auf den Jeep lediglich gelingen, weil die Hacker in der Lage waren, die Firmware des Infotainment-Systems umzuschreiben. Miller schreibt, dass ein Verikationsmechanismus durch Code-Signierung einen End-to-End-Angriff derartig erschwert hätte, dass er bezweifelt, dass er und Valasek ihre Forschung über das Kontrollieren des Infotainment-Systems hinaus fortgesetzt hätten \cite[7]{MillerCharlie.2019}.
 
 
 
+\subsection{Forensics}
+Die letzte Stufe Forensics beschäftigt sich mit der Nachverfolgung, Untersuchung und Analyse von Angriffen, um Informationen über den Tathergang, die Taktiken der Angreifer und mögliche Schwachstellen zu gewinnen.
+Damit spielt sie eine wichtige Rolle bei der Reaktion auf Sicherheitsvorfälle und der Verbesserung der Sicherheitssysteme. Die Stufe ermöglicht es, aus Sicherheitsvorfällen zu lernen, Erkenntnisse zu gewinnen und das Sicherheitssystem kontinuierlich zu verbessern. Sie stellt sicher, dass potenzielle Schwachstellen erkannt und behoben werden können, um die Widerstandsfähigkeit gegenüber zukünftigen Angriffen zu stärken.
+
+\subsubsection{Ereignisprotokollierung und digitale Beweissicherung}
+Durch eine umfassende Protokollierung von Ereignissen und Aktivitäten im Netzwerk können Forensik-Experten Informationen über verdächtige Aktivitäten sammeln. Dies umfasst unter anderem das Aufzeichnen von Netzwerkverbindungen, Systemereignissen, Benutzeraktivitäten und Änderungen an Dateien oder Konfigurationen.
+Die Sammlung und Bewahrung von digitalen Beweisen ist ein zentraler Aspekt der Forensik. Hierbei werden spezielle Techniken und Werkzeuge eingesetzt, um Daten zu sichern, die bei der Analyse von Sicherheitsvorfällen helfen können. Dazu gehören beispielsweise die Erstellung von Abbildern von Festplatten oder das Erfassen von Netzwerkverkehr.
+
+\subsubsection{Forensische Analyse}
+Die gewonnenen Beweise werden von Forensik-Experten untersucht und analysiert, um den Tathergang zu rekonstruieren, Angriffsmuster zu identifizieren und mögliche Schwachstellen im Sicherheitssystem aufzudecken. Dabei kommen spezielle forensische Tools und Methoden zum Einsatz, um Daten zu extrahieren, zu analysieren und zu interpretieren.
+
+\subsubsection{Anwendung der Erkenntnisse}
+Sobald ein Sicherheitsvorfall aufgedeckt wird, ermöglicht die forensische Analyse die effektive Reaktion darauf. Die gewonnenen Erkenntnisse dienen dazu, den Vorfall einzudämmen, betroffene Systeme zu sichern, die Auswirkungen zu bewerten und geeignete Gegenmaßnahmen zu ergreifen.
+Die Erkenntnisse aus forensischen Analysen fließen dann in den kontinuierlichen Verbesserungsprozess der Sicherheitsstrategie ein. Sie helfen dabei, Schwachstellen zu identifizieren, die Sicherheitsmaßnahmen anzupassen und präventive und reaktive Maßnahmen zu optimieren, um zukünftige Angriffe besser zu verhindern oder darauf zu reagieren.
 
 
-
-
-
-
-\section{Sichere Produktionsumgebung}
-\cite[219]{Wurm.2022}
+%\section{Sichere Produktionsumgebung}
+%\cite[219]{Wurm.2022}
 
 \section{Herausforderungen der Automotive Security}
-\cite[36]{Wurm.2022} + 233 (AM-Devices)
+Der Bereich der Automotive Security bietet einige besondere Herausforderungen im Vergleich zur Sicherheit von anderen IT-Systemen. In diesem Abschnitt werden einige dieser Besonderheiten abschließend thematisiert, um ein gewisses Verständnis für die Schwierigkeiten der Automobilhersteller bei der sicheren Gestaltung ihrer Fahrzeuge zu schaffen.
+
+\subsection{Mehrstufige Lieferkette}
+Die Hersteller beziehen einen sehr großen Teil ihrer Software und Hardware von externen Lieferanten, die wiederum ebenfalls Teile und Softwarebibliotheken aus anderen externen Quellen verwenden. Daher ist es sehr schwer, Kontrolle und Überblick über den gesamten Herstellungsprozess zu wahren und Security-Anforderungen an alle (auch indirekten) Zulieferer zu kommunizieren. \cite[36]{Wurm.2022} 
+
+\subsection{Minimierung von Kosten und Zeit}
+Wie in anderen Branchen auch kann auch in der Automobilbranche das Streben nach Wirtschaftlichkeit der Security im Weg stehen. Hersteller versuchen daher eher, ein Produkt zu erstellen, dass geradeso den Security-Anforderungen genügt, als zu teure Produkte mit übertriebenen Schutzmaßnahmen \cite[37]{Wurm.2022}.
+
+\subsection{Produktlebensdauer}
+Da Cyber Security oft einem Wettrennen zwischen Angreifern und Verteidigern gleicht, sind regelmäßige Sicherheitsupdates und Patches essenziell für die Fahrzeugsicherheit. Die zeitnahe Verteilung der Updates auf die Fahrzeuge (gerade auf ältere Modelle), ohne dabei eine neue Angriffsfläche zu schaffen, stellt ein großes Problem dar. \cite[37]{Wurm.2022}
+
+\subsection{Konflikt der Ressourcen}
+Umfassende Security-Maßnahmen wirken sich negativ auf die Kommunikationsgeschwindigkeit im Fahrzeug aus. Das ist bei Safety-relevanten Systemen, die in Echtzeit operieren müssen natürlich problematisch. Zudem können durch manche Safety-Maßnahmen wie zum Beispiel redundante Pfade für mehr Robustheit neue Angriffsflächen entstehen. \cite[38]{Wurm.2022}
+
+\subsection{Aftermarket-Devices}
+Für Automobile werden viele sogenannte Aftermarket-Devices von Drittanbietern hergestellt, um dem Fahrzeug zusätzliche Features zu verleihen. Diese Geräte können jedoch zusätzliche Angriffsflächen schaffen oder auch vorhandene Angriffsflächen vergrößern. \cite[233]{Wurm.2022}
 
 
 
 
 \chapter{Fazit}
-größtes Hindernis Reverse-Engineering
+Entsprechend der Zielsetzung zu Beginn wird im Rahmen dieser Arbeit ein Überblick über die Angriffsflächen eines Automobils geschaffen. Insbesondere die Schnittstellen, über die ein Angreifer sich Zugriff auf das Fahrzeugnetzwerk schaffen kann, wurden untersucht. Da viele dieser Schnittstellen in der Vergangenheit bereits zu akademischen Zwecken für einen Angriff genutzt wurden, konnte anhand dieser Erfahrungen eine grobe Einschätzung des Risikos der Schwachstellen erfolgen. Darüber hinaus wurden Ansätze für mögliche Schutzmaßnahmen vorgestellt, um Fahrzeuge gegen Angriffe zu verteidigen. Dabei wurde sich am Defense-in-Depth-Modell von Nilsson und Larson orientiert.\\
+Die vorgestellten Ansätze liefern auch Antworten auf die Forschungsfrage der Arbeit, wo Hersteller ansetzen können, um ihre Fahrzeuge sicherer zu gestalten. Darüber hinaus können die Hersteller aber noch mehr verbessern. Wichtig ist beispielsweise eine Verbesserung der Kommunikation und des Austauschs zwischen Autoherstellern und der akademischen Forschung. Durch enge Zusammenarbeit kann es gelingen, neue Forschungsergebnisse schnell in die Entwicklung miteinzubeziehen und neu entdeckte Schwachstellen schneller zu beheben. In der Vergangenheit gab es bei der Kommunikation noch deutlichen Verbesserungsbedarf. Beispielsweise wurden Miller und Valasek, als sie sich mit ihren vorläufigen Forschungsergebnissen an die betreffenden Hersteller wandten, zunächst nicht ernst genug genommen, um die entdeckten Schwachstellen zu beheben. Erst nachdem sie den Aufsehen erregenden Angriff auf den Jeep Cherokee durchführten, reagierten die Hersteller und behoben die Schwachstellen.\\
+Ein weiteres Beispiel für schlechte Kommunikation zeigt sich darin, dass bei den meisten akademischen Hackerangriffen auf Fahrzeuge der größte Aufwand im Reverse-Engineering der im Fahrzeug verwendeten Protokolle und Firmware lag. Deren Funktionsweise halten die Hersteller nämlich meistens unter Verschluss, ganz nach dem Prinzip \glqq Security by Obscurity\grqq . Das dieses Prinzip nicht eingesetzt werden sollte, gehört zu den Grundlagen der IT Sicherheit. Besser wäre es, die Hersteller würden zumindest gegenüber Forschern transparent mit ihren Methoden umgehen und stattdessen bessere, richtige Sicherheitsmechanismen implementieren, die auch wenn sie allgemein bekannt sind funktionieren. Durch eine engere Zusammenarbeit der beiden Fronten können sowohl die Wissenschaft als auch die Sicherheit der Fahrzeuge nur profitieren.\\
+Ein weiterer Ansatz zur Verbesserung der Automotive Security ist es, die modernen Fahrzeuge mehr wie das zu behandeln, was sie sind: vernetzte Computersysteme. Die alten Protokolle wie \acs{CAN} oder \acs{LIN} wurden nicht für solche vernetzten Systeme entwickelt und sind dementsprechend von ihrer Natur aus schlecht gegen Angriffe von außen abgesichert. Möglicherweise ist es Zeit, vermehrt andere Standards in der Automobilentwicklung einzusetzen. Das können vorhandene Standards sein wie zu Beispiel Ethernet/IP oder auch komplett neue Standards, die den neuen Anforderungen an Automotive Netzwerke gerecht werden. Es ergibt Sinn, mehr Ressourcen in der Erforschung neuer Standards und Technologien für die wachsenden Anforderungen zu stecken, da der Trend aktuell mit autonomem Fahren und dem Internet der Dinge immer weiter hin zu immer mehr Vernetzung und Automatisierung verläuft.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
